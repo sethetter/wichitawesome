@@ -1,0 +1,16 @@
+.thin { font-weight: 100; }
+.light { font-weight: 300; }
+.regular { font-weight: normal }
+.semibold { font-weight: 600 }
+.bold    { font-weight: $bold-font-weight }
+.italic  { font-style: italic }
+.underline { text-decoration: underline }
+.caps    { text-transform: uppercase; }
+.track    { letter-spacing: .2em; }
+
+.l-align   { text-align: left }
+.center       { text-align: center }
+.r-align  { text-align: right }
+.justify      { text-align: justify }
+
+.nowrap { white-space: nowrap }

@@ -1,0 +1,60 @@
+.btn-o {
+    position: relative;
+    z-index: 2;
+    color: inherit;
+    background-color: transparent;
+    border-radius: $border-radius;
+    border: $border-width solid currentcolor;
+    -webkit-transition-duration: .1s;
+            transition-duration: .1s;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+    -webkit-transition-property: box-shadow, background-color;
+            transition-property: box-shadow, background-color;
+}
+
+.btn-o:before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: -$border-width;
+    right: -$border-width;
+    bottom: -$border-width;
+    left: -$border-width;
+    border: $border-width solid transparent;
+    background-color: currentcolor;
+    border-radius: $border-radius;
+    -webkit-transition-duration: .1s;
+            transition-duration: .1s;
+    -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+    -webkit-transition-property: opacity;
+            transition-property: opacity;
+    opacity: 0;
+}
+
+.btn-o:hover {
+    box-shadow: none;
+}
+
+.btn-o:hover:before,
+.btn-o:focus:before {
+    opacity: .125;
+}
+
+.btn-o:focus {
+    outline: none;
+    border: $border-width solid currentcolor;
+    box-shadow: 0 0 0 2px;
+}
+
+.btn-o:active,
+.btn-o.is-active {
+    box-shadow: inset 0 1px 5px 0, 0 0 1px;
+}
+
+.btn-o:disabled,
+.btn-o.is-disabled {
+    opacityty: .5;
+}

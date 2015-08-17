@@ -1,0 +1,116 @@
+$i-facebook: "\e600";
+$i-arrow-right-circle: "\e01d";
+$i-location: "\e052";
+$i-link: "\e07b";
+$i-file-download: "\e0ff";
+$i-edit: "\e15e";
+$i-share: "\e25a";
+$i-delete: "\e287";
+$i-launch: "\e2a9";
+$i-clock: "\e2c9";
+$i-description: "\e2e4";
+$i-date: "\e2f1";
+$i-visibility: "\e306";
+$i-visibility-off: "\e307";
+$i-arrow-left-circle: "\e605";
+
+@font-face {
+	font-family: 'ICT Events Icons';
+	src:url('../fonts/ICT-Events-Icons/ICT-Events-Icons.eot?xj83hy');
+	src:url('../fonts/ICT-Events-Icons/ICT-Events-Icons.eot?#iefixxj83hy') format('embedded-opentype'),
+		url('../fonts/ICT-Events-Icons/ICT-Events-Icons.ttf?xj83hy') format('truetype'),
+		url('../fonts/ICT-Events-Icons/ICT-Events-Icons.woff?xj83hy') format('woff'),
+		url('../fonts/ICT-Events-Icons/ICT-Events-Icons.svg?xj83hy#ICT-Events-Icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+// @font-face {
+// 	font-family: 'Domine';
+// 	src:url('../fonts/Domine/Domine-Regular.ttf?xj83hy') format('truetype');
+// 	font-weight: 400;
+// 	font-style: normal;
+// }
+
+// @font-face {
+// 	font-family: 'Domine';
+// 	src:url('../fonts/Domine/Domine-Bold.ttf?xj83hy') format('truetype');
+// 	font-weight: 700;
+// 	font-style: normal;
+// }
+
+// @font-face {
+// 	font-family: 'Montserrat';
+// 	src:url('../fonts/Montserrat/Montserrat-Regular.ttf?xj83hy') format('truetype');
+// 	font-weight: 400;
+// 	font-style: normal;
+// }
+
+// @font-face {
+// 	font-family: 'Montserrat';
+// 	src:url('../fonts/Montserrat/Montserrat-Bold.ttf?xj83hy') format('truetype');
+// 	font-weight: 700;
+// 	font-style: normal;
+// }
+
+.i {
+	font-family: 'ICT Events Icons';
+	font-size: 1.125rem;
+	display: inline-block;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.i-file-download:before {
+	content: $i-file-download;
+}
+.i-delete:before {
+	content: $i-delete;
+}
+.i-visibility:before {
+	content: $i-visibility;
+}
+.i-visibility-off:before {
+	content: $i-visibility-off;
+}
+.i-facebook:before {
+	content: $i-facebook;
+}
+.i-arrow-right-circle:before {
+	content: $i-arrow-right-circle;
+}
+.i-location:before {
+	content: $i-location;
+}
+.i-link:before {
+	content: $i-link;
+}
+.i-edit:before {
+	content: $i-edit;
+}
+.i-share:before {
+	content: $i-share;
+}
+.i-launch:before {
+	content: $i-launch;
+}
+.i-clock:before {
+	content: $i-clock;
+}
+.i-description:before {
+	content: $i-description;
+}
+.i-date:before {
+	content: $i-date;
+}
+.i-arrow-left-circle:before {
+	content: $i-arrow-left-circle;
+}

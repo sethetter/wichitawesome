@@ -1,0 +1,58 @@
+input,
+select,
+textarea,
+fieldset {
+    font-size: $form-field-font-size;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+input[type=text],
+input[type=datetime],
+input[type=datetime-local],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=time],
+input[type=url],
+input[type=week] {
+    box-sizing: border-box;
+    height: $form-field-height;
+    padding: $form-field-padding-y $form-field-padding-x;
+    vertical-align: middle;
+    -webkit-appearance: none;
+}
+
+select {
+    box-sizing: border-box;
+    padding: $form-field-padding-y $form-field-padding-x;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    background: $white url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat;
+}
+
+select:not([multiple]) {
+    height: $form-field-height;
+    vertical-align: middle;
+}
+
+textarea {
+    box-sizing: border-box;
+    height: $form-field-height;
+    padding: $form-field-padding-y $form-field-padding-x;
+    resize: vertical;
+}
+
+fieldset {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border: 0;
+}
+fieldset legend {
+    padding: 0;
+}

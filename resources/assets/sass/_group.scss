@@ -1,0 +1,11 @@
+.x-grp { margin-left: -$border-width }
+.x-grp:first-of-type { margin-left: 0 }
+
+.y-grp { margin-top: -$border-width }
+.y-grp:first-of-type { margin-top: 0 }
+
+.x-grp:focus,
+.y-grp:focus {
+    position: relative;
+    z-index: 1;
+}

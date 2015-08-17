@@ -1,0 +1,48 @@
+.black, .dark-gray   { color: $black }
+.gray, .mid-gray     { color: $gray }
+.silver, .light-gray { color: $silver }
+.white { color: $white }
+
+.red    { color: $red }
+.yellow { color: $yellow }
+.green  { color: $green }
+
+.gold { color: $gold }
+.light-blue { color: $light-blue }
+.dark-red { color: $dark-red }
+
+/* Background Color */
+
+.bg-black  { background-color: $black }
+.bg-gray   { background-color: $gray }
+.bg-silver { background-color: $silver }
+.bg-white  { background-color: $white }
+
+.bg-red    { background: $red }
+.bg-yellow { background: $yellow }
+.bg-green  { background: $green }
+
+.bg-gold { background-color: $gold }
+.bg-light-blue { background-color: $light-blue }
+.bg-dark-red { background-color: $dark-red }
+
+.bg-darken-1 { background-color: $darken-1 }
+.bg-darken-2 { background-color: $darken-2 }
+.bg-darken-3 { background-color: $darken-3 }
+.bg-darken-4 { background-color: $darken-4 }
+
+/* Border Color */
+
+.border-black  { border-color: $black }
+.border-gray   { border-color: $gray }
+.border-silver { border-color: $silver }
+.border-white  { border-color: $white }
+
+.border-darken-1 { border-color: $darken-1 }
+.border-darken-2 { border-color: $darken-2 }
+.border-darken-3 { border-color: $darken-3 }
+.border-darken-4 { border-color: $darken-4 }
+
+/* Opacity */
+
+.muted { opacity: .5 }

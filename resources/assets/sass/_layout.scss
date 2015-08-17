@@ -1,0 +1,22 @@
+.inl      { display: inline }
+.blk        { display: block }
+.inl-blk { display: inline-block }
+
+.o-hidden { overflow: hidden }
+.o-scroll { overflow: scroll }
+.o-auto   { overflow: auto }
+
+.clearfix:before,
+.clearfix:after {
+  content: ' ';
+  display: table
+}
+.clearfix:after { clear: both }
+
+.left  { float: left }
+.right { float: right }
+
+.fit { max-width: 100% }
+
+.half { width: 50% }
+.full { width: 100% }

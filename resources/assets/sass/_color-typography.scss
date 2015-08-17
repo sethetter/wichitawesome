@@ -1,0 +1,34 @@
+body {
+    color: $gray;
+    background-color: #fff;
+}
+
+::selection {
+    color: #fff;
+    background: $red;
+}
+::-moz-selection {
+    color: #fff;
+    background: $red;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+    transition: color .3s;
+}
+a:hover {
+    color: $red;
+}
+
+pre, code {
+    background-color: $pre-background-color;
+    border-radius: $border-radius;
+}
+
+hr {
+    border: 0;
+    border-bottom-style: solid;
+    border-bottom-width: $border-width;
+    border-bottom-color: $border-color;
+}

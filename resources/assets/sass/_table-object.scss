@@ -1,0 +1,46 @@
+.tbl {
+  display: table;
+  width: 100%;
+}
+.tbl-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.tbl-fixed { table-layout: fixed }
+@media #{$breakpoint-sm} {
+
+  .sm-tbl {
+    display: table;
+    width: 100%;
+  }
+  .sm-tbl-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}
+@media #{$breakpoint-md} {
+
+  .md-tbl {
+    display: table;
+    width: 100%;
+  }
+  .md-tbl-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}
+@media #{$breakpoint-lg} {
+
+  .lg-tbl {
+    display: table;
+    width: 100%;
+  }
+  .lg-tbl-cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}

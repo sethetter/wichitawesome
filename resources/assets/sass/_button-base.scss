@@ -1,0 +1,31 @@
+button,
+.btn {
+    font-family: $heading-font-family;
+    font-size: $button-font-size;
+    font-weight: $button-font-weight;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: $button-line-height;
+    padding: $button-padding-y $button-padding-x;
+    margin: 0;
+    height: auto;
+    border: $border-width solid transparent;
+    vertical-align: middle;
+    -webkit-appearance: none;
+}
+
+button:after,
+button:before,
+.btn:after,
+.btn:before {
+    box-sizing: border-box;
+}
+
+::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.btn:hover { text-decoration: none }

@@ -1,0 +1,49 @@
+label {
+    font-family: $heading-font-family;
+    padding: $form-field-padding-y $form-field-padding-x;
+    transition: all .2s;
+}
+.field {
+    color: $black;
+    background-color: #fff;
+    border: 0;
+    border-bottom: $border-width solid $border-color; 
+}
+
+.field:focus {
+    outline: none;
+    border-color: $light-blue;
+    box-shadow: 0 0 0 2px color($light-blue a(.5));
+}
+
+.field:disabled {
+    background-color: $darken-2;
+    opacity: .5;
+}
+
+.field:read-only:not(select) {
+    background-color: $darken-2;
+}
+
+.field:invalid {
+    border-color: $red;
+}
+
+.field.success {
+    border-color: $green;
+}
+
+.field.warning {
+    border-color: $yellow;
+}
+
+.field.error {
+    border-color: $red;
+}
+
+.field-active label {
+    font-size: $h6;
+    top: -.75em;
+    padding-top: 0;
+    padding-bottom: 0;
+}

@@ -1,0 +1,39 @@
+.b {
+    border-style: solid;
+    border-width: $border-width;
+    border-color: $border-color;
+}
+
+.bt {
+    border-top-style: solid;
+    border-top-width: $border-width;
+    border-top-color: $border-color;
+}
+
+.br {
+    border-right-style: solid;
+    border-right-width: $border-width;
+    border-right-color: $border-color;
+}
+
+.bb {
+    border-bottom-style: solid;
+    border-bottom-width: $border-width;
+    border-bottom-color: $border-color;
+}
+
+.bl {
+    border-left-style: solid;
+    border-left-width: $border-width;
+    border-left-color: $border-color;
+}
+
+.brad { border-radius: $border-radius }
+.circle  { border-radius: 50% }
+
+.bradt    { border-radius: $border-radius $border-radius 0 0 }
+.bradr  { border-radius: 0 $border-radius $border-radius 0 }
+.bradb { border-radius: 0 0 $border-radius $border-radius }
+.bradl   { border-radius: $border-radius 0 0 $border-radius }
+
+.brad0 { border-radius: 0 }
