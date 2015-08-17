@@ -57,10 +57,10 @@
                 <input type="text" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook') }}">
             </div>
 
-{{--             <div class="rel mb2 sm-col sm-col-12 sm-px1">
+            <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="hashtag">Hashtag</label>
                 <input type="text" class="blk col-12 mb1 field" id="hashtag" name="hashtag" value="{{ old('hashtag') }}">
-            </div> --}}
+            </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="description">Description</label>
