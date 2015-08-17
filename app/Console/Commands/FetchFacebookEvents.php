@@ -4,7 +4,7 @@ namespace ICT\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use ICT\Services\facebookEventFetcher;
+use ICT\Services\FacebookEventFetcher;
 
 class FetchFacebookEvents extends Command
 {
