@@ -42,6 +42,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password'  => ['required','confirmed','min:6'],
     ];
 
+    public function setPasswordAttribute($value)
+    {   
+        $this->attributes['password'] = bcrypt($value);
+    }
+
     /**
      * Get check permissions of user.
      * 

@@ -4,7 +4,6 @@ namespace ICT\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Hash;
 use ICT\Http\Requests\AdminRequest;
 use ICT\Http\Requests\StoreRequest;
 use ICT\Http\Requests\UpdateRequest;
@@ -81,9 +80,6 @@ class UserController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $userInput = $request->all();
-        if(isset($request->password)) {
-            $userInput->password = Hash::make($request->password);
-        }
         User::findOrFail($id)->update($userInput);
         return redirect('users/admin')->with('message', 'User updated.');
     }
