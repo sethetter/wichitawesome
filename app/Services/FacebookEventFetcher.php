@@ -15,11 +15,13 @@ class FacebookEventFetcher
     protected $access_token = '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA';
     protected $fields = ['name', 'description', 'start_time', 'end_time', 'updated_time'];
 
-    protected $venues;
+    protected $venues = [];
 
     public function __construct()
     {
-        $this->venues = Venue::where('facebook', '!=', 0)->get();
+        if(\Schema::hasTable('venues')) {
+            $this->venues = Venue::where('facebook', '!=', 0)->get();
+        }
     }
 
     public function storeEvents()
