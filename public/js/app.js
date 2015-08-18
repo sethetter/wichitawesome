@@ -10,7 +10,7 @@ window.autosize = require('./vendor/autosize');
 window.scrollFrame = require('./vendor/scroll-frame');
 window.scrollawesome = require('./scrollawesome');
 
-window.apiUrl = 'http://local.wichitaweso.me/api/';
+window.apiUrl = 'http://' + window.location.hostname + '/api/';
 
 },{"./cache":2,"./form":4,"./maps":5,"./scrollawesome":6,"./vendor/autosize":7,"./vendor/jquery-ui.min":8,"./vendor/scroll-frame":9}],2:[function(require,module,exports){
 "use strict";

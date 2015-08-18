@@ -7,4 +7,4 @@ window.autosize = require('./vendor/autosize');
 window.scrollFrame = require('./vendor/scroll-frame');
 window.scrollawesome = require('./scrollawesome');
 
-window.apiUrl = 'http://local.wichitaweso.me/api/';
+window.apiUrl = 'http://'+ window.location.hostname +'/api/';
