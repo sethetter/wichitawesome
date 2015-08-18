@@ -78,8 +78,10 @@ class VenueController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Venue::create($request->all());
-        return redirect('venues')->with('message', 'Venue created!');
+        $data = $request->all();
+        $data['visible'] = true;
+        Venue::create($data);
+        return redirect('venues/admin')->with('message', 'Venue created!');
     }
 
     /**

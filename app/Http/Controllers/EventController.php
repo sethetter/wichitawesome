@@ -128,7 +128,9 @@ class EventController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        Event::create($request->all());
+        $data = $request->all();
+        $data['visible'] = true;
+        Event::create($data);
         return redirect('events/admin')->with('message', 'Event created!');
     }
 
