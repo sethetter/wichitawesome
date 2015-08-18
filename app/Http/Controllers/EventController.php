@@ -53,7 +53,7 @@ class EventController extends Controller
         $data['events'] = Event::with('venue')->upcoming()->simplePaginate(10);
         if(count($data['events']))
         {
-            return view('events.partials.list', $data);
+            return response()->view('events.partials.list', $data);
         }
         abort(404);
     }
