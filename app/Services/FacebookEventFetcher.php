@@ -56,9 +56,9 @@ class FacebookEventFetcher
                 'end_time' => isset($event->end_time) ? $this->castToDateTime($event->end_time) : null,
                 'facebook' => $event->id,
                 'venue_id' => $venue->id,
-                'updated_at' => $this->castToDateTime($event->updated_time)
+                'updated_at' => $this->castToDateTime($event->updated_time),
             ];
-            $newEvent = Event::where('facebook', '=', $event->id)->first();
+            $newEvent = Event::where('facebook', '=', $event->id)->withHidden()->first();
             if(!is_null($newEvent))
             {
                 // @TODO: test that this comparison works.
@@ -67,6 +67,7 @@ class FacebookEventFetcher
                     $newEvent->update($facebookData);
                 }
             } else {
+                $facebookData['visible'] = true;
                 Event::create($facebookData);
             }
         }
