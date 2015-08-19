@@ -26,7 +26,6 @@ module.exports = function(undefined) {
     var stopSpace = 64;
     var lastPosition = -1;
     var elements;
-    var size;
     var matrix = [];
     var eventList = document.getElementById('event_list');
     var pagination = document.getElementById('pagination_next');
@@ -40,12 +39,13 @@ module.exports = function(undefined) {
         if (lastPosition == scrollY) {
             scroll(loop);
             return false;
-        } else {
-            lastPosition = scrollY;
         }
+        
+        lastPosition = scrollY;
 
+        var l = matrix.length;
         var i = 0;
-        for(i; i<size; i++) {       
+        for(i; i<l; i++) {       
             if (scrollY >= matrix[i].start) {        
                 var stop = matrix[i+1] ? matrix[i+1].start - stopSpace - matrix[i].height : matrix[i].start;
 
@@ -86,15 +86,28 @@ module.exports = function(undefined) {
     };
 
     var refresh = function() {
-        elements = document.getElementsByClassName('event-date');
-        size = elements.length;
-        var i = 0;
-        for(i; i<size; i++) {
-            matrix[i] = { el: elements[i] };
-            matrix[i].el.style['position'] = '';
-            matrix[i].el.style['top'] = '';
-            matrix[i].height = matrix[i].el.offsetHeight
-            matrix[i].start = matrix[i].el.offsetTop - startSpace;
+        // Convert NodeList into an Array so that we can delete elements
+        // without jacking up the Array's indexes
+        elements = [].slice.call(document.getElementsByClassName('event-date'));
+        var l = elements.length;
+        var i = 0; // index for elements
+        var j = 0; // index for matrix
+        var date = null;
+        for(i; i<l; i++) {
+            var datetime = elements[i].getAttribute('datetime');
+            if( date === datetime.substr(0, datetime.indexOf('T')) ) {
+                elements[i].parentNode.removeChild(elements[i]);
+                continue;
+            }
+
+            date = datetime.substr(0, datetime.indexOf('T'));
+
+            matrix[j] = { el: elements[i] };
+            matrix[j].el.style['position'] = '';
+            matrix[j].el.style['top'] = '';
+            matrix[j].height = matrix[j].el.offsetHeight
+            matrix[j].start = matrix[j].el.offsetTop - startSpace;
+            j++;
         }
         paginationStart = documentHeight() - (window.innerHeight * 2) ;
         loadingPage = false;

@@ -673,13 +673,16 @@ hr {
   border-bottom-width: 1px;
   border-bottom-color: rgba(0, 0, 0, 0.125); }
 
-.black, .dark-gray {
+.black {
   color: #162536; }
 
-.gray, .mid-gray {
+.gray {
   color: #77869f; }
 
-.silver, .light-gray {
+.light-gray {
+  color: #b5bfcf; }
+
+.silver {
   color: #efefef; }
 
 .white {
@@ -1971,6 +1974,19 @@ h6, .h6 {
 .ui-icon-circle-triangle-e:before {
   content: ""; }
 
+html, body {
+  height: 100%; }
+
+.main {
+  min-height: 100%;
+  margin: 0 0 -3.5rem 0; }
+
+.main-content {
+  padding: 0 0 3.5rem 0; }
+
+.foot {
+  height: 1.5rem; }
+
 .font-body {
   font-family: "Domine", serif; }
 
@@ -1996,6 +2012,7 @@ h6, .h6 {
   color: #ec1d36; }
 
 .event-date {
+  line-height: 1.1;
   transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0); }
