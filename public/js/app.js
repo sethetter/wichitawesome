@@ -260,9 +260,12 @@ var form = {
 
         // if the string is a facebook url
         if (str.indexOf('//www.facebook.com/') > -1) {
-
             // get the page id segment from the URL
-            str = str.split('/')[3];
+            if (str.indexOf('/pages/') === -1) {
+                str = str.split('/')[3];
+            } else {
+                str = str.split('/')[5];
+            }
         }
 
         var cachedVenue = cache.get(str);
