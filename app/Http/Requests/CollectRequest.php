@@ -30,11 +30,11 @@ class CollectRequest extends Request
         switch ($this->segment(1))
         {
             case 'events':
-                $start_time = $this->s_date.' '.$this->s_time;
+                $start_time = Carbon::createFromTimeStamp( strtotime($this->s_date.' '.$this->s_time) );
                 $end_time = null;
                 if ($this->e_date && $this->e_time)
                 {
-                    $end_time = $this->e_date.' '.$this->e_time;
+                    $end_time = Carbon::createFromTimeStamp( strtotime($this->e_date.' '.$this->e_time) );
                 }
 
                 $this->merge(['start_time' => $start_time, 'end_time' => $end_time]);
