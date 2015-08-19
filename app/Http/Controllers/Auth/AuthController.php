@@ -36,6 +36,16 @@ class AuthController extends Controller
     }
 
     /**
+     * Get the failed login message.
+     *
+     * @return string
+     */
+    protected function getFailedLoginMessage()
+    {
+        return 'That info doesn\'t look right. Try again.';
+    }  
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
