@@ -22,6 +22,7 @@ var form = {
         end_date:       $('#e_date'),
         end_time:       $('#e_time'),
         phone:          $('#phone'),
+        website:        $('#website'),
         description:    $('#description')
     },
     format: {
@@ -225,6 +226,7 @@ var form = {
             form.inputs.name.val(cachedVenue.name);
             form.inputs.facebook.val(cachedVenue.id);
             form.inputs.phone.val(cachedVenue.phone);
+            form.inputs.website.val(cachedVenue.website);
             form.inputs.description.val(cachedVenue.about);
 
             form.setVenueLocation(cachedVenue.location);
@@ -241,6 +243,7 @@ var form = {
                 form.inputs.name.val(venue.name);
                 form.inputs.facebook.val(venue.id);
                 form.inputs.phone.val(venue.phone);
+                form.inputs.website.val(venue.website);
                 form.inputs.description.val(venue.about);
 
                 form.setVenueLocation(venue.location);

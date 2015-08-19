@@ -35,7 +35,11 @@ module.exports = {
     version: 'v2.4',
     token: '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA',
     pageToVenue: function pageToVenue(venueId) {
-        return $.getJSON('https://graph.facebook.com/' + this.version + '/' + venueId, { fields: 'name,location,phone,about', access_token: this.token });
+        return $.getJSON('https://graph.facebook.com/' + this.version + '/' + venueId, { fields: 'name,location,phone,about,website', access_token: this.token }).done(function (venue) {
+            if (venue.hasOwnProperty('website')) {
+                venue.website = venue.website.replace('www.', '');
+            }
+        });
     },
     pageToEvent: function pageToEvent(eventId) {
         return $.getJSON('https://graph.facebook.com/' + this.version + '/' + eventId, { access_token: this.token });
@@ -69,6 +73,7 @@ var form = {
         end_date: $('#e_date'),
         end_time: $('#e_time'),
         phone: $('#phone'),
+        website: $('#website'),
         description: $('#description')
     },
     format: {
@@ -274,6 +279,7 @@ var form = {
             form.inputs.name.val(cachedVenue.name);
             form.inputs.facebook.val(cachedVenue.id);
             form.inputs.phone.val(cachedVenue.phone);
+            form.inputs.website.val(cachedVenue.website);
             form.inputs.description.val(cachedVenue.about);
 
             form.setVenueLocation(cachedVenue.location);
@@ -288,6 +294,7 @@ var form = {
             form.inputs.name.val(venue.name);
             form.inputs.facebook.val(venue.id);
             form.inputs.phone.val(venue.phone);
+            form.inputs.website.val(venue.website);
             form.inputs.description.val(venue.about);
 
             form.setVenueLocation(venue.location);
