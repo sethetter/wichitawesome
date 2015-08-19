@@ -101,7 +101,7 @@ var form = {
     // TODO: Make this function better, it won't work right if there are multiple forms on the same page.
     //       We should probably re-factor this class to work with multiple intances
     displayError: function displayError(message) {
-        $('.form-head').append('<div class="p1 mb2 h5 font-heading white bg-dark-red">' + message + '</div>');
+        $('.form-head').empty().append('<div class="p1 mb2 h5 font-heading white bg-dark-red">' + message + '</div>');
     },
     positionLabels: function positionLabels() {
         $('.field').each(function () {
