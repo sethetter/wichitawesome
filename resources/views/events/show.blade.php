@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', $event->name)
+@section('title', $event->name.' |Wichitawesome!')
 @section('description', $event->name.' at '.(isset($event->venue->name) ? $event->venue->name : $event->venue->street.' Wichita, KS') )
 
 @section('container', 'container')

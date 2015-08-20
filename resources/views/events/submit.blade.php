@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'An Awesome New Event')
+@section('title', 'An Awesome New Event | Wichitawesome!')
 @section('description', 'Add an awesome new event to our website!')
 
 @section('container', 'container')

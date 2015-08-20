@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'What\'s on your mind?')
+@section('title', 'What\'s on your mind? | Wichitawesome!')
 @section('description', 'Send us some feedback.')
 
 @section('container', 'container')
