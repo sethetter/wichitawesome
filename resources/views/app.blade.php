@@ -8,21 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="@yield('title') | Wichitawesome!">
+    <meta itemprop="name" content="@yield('title')">
     <meta itemprop="description" content="@yield('description')">
     <meta itemprop="image" content="{{ asset('img/wichitawesome.png') }}">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@yeah_wichita">
-    <meta name="twitter:title" content="@yield('title') | Wichitawesome!">
+    <meta name="twitter:title" content="@yield('title')">
     <meta name="twitter:description" content="@yield('description')">
     <meta name="twitter:creator" content="@ima_crayon">
     <!-- Twitter summary card with large image must be at least 280x150px -->
     <meta name="twitter:image:src" content="{{ asset('img/wichitawesome.png') }}">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="@yield('title') | Wichitawesome!" />
+    <meta property="og:title" content="@yield('title')" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ Request::url() }}" />
     <meta property="og:image" content="{{ asset('img/wichitawesome.png') }}" />
