@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title', 'Events')
-@section('description', 'Upcoming events in Wichita, KS')
+@section('description', 'Find upcoming events in Wichita, KS!')
 
 @section('container', 'container')
 

@@ -14,10 +14,11 @@
 
 /* Background Color */
 
-.bg-black  { background-color: $black }
-.bg-gray   { background-color: $gray }
-.bg-silver { background-color: $silver }
-.bg-white  { background-color: $white }
+.bg-black      { background-color: $black }
+.bg-gray       { background-color: $gray }
+.bg-light-gray { background: $light-gray }
+.bg-silver     { background-color: $silver }
+.bg-white      { background-color: $white }
 
 .bg-red    { background: $red }
 .bg-yellow { background: $yellow }

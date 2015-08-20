@@ -713,6 +713,9 @@ hr {
 .bg-gray {
   background-color: #77869f; }
 
+.bg-light-gray {
+  background: #b5bfcf; }
+
 .bg-silver {
   background-color: #efefef; }
 
@@ -801,15 +804,16 @@ input[type=week] {
   box-sizing: border-box;
   height: 2.25rem;
   padding: 0.5rem 0.5rem;
+  border-radius: 0px;
   vertical-align: middle;
   -webkit-appearance: none; }
 
 select {
   box-sizing: border-box;
   padding: 0.5rem 0.5rem;
+  border-radius: 0px;
   -moz-appearance: none;
   -webkit-appearance: none;
-  border-radius: 0;
   background: #fff url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat; }
 
 select:not([multiple]) {
@@ -820,6 +824,7 @@ textarea {
   box-sizing: border-box;
   height: 2.25rem;
   padding: 0.5rem 0.5rem;
+  border-radius: 0px;
   resize: vertical; }
 
 fieldset {
@@ -1116,7 +1121,7 @@ th {
 
 th,
 td {
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 0.25rem;
   line-height: inherit; }
 
 th {

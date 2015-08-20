@@ -14,7 +14,7 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
-                <button type="button" class="btn right" id="btn_facebook">Pull Facebook Info</button>
+                <button type="button" class="btn right bg-light-gray" id="btn_facebook">Pull Facebook Info</button>
                 <div class="o-hidden">
                     <label class="caps h5 abs" for="fb_url">Facebook URL</label>
                     <input type="text" class="blk col-12 mb1 field" id="fb_url" name="fb_url" value="{{ old('fb_url') }}">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
-                <button type="button" class="btn right" id="btn_map">Map It</button>
+                <button type="button" class="btn right bg-light-gray" id="btn_map">Map It</button>
                 <div class="o-hidden">
                     <label class="caps h5 abs" for="street">Street</label>
                     <input type="text" class="blk col-12 mb1 field" id="street" name="street" value="{{ old('street') }}">
@@ -81,13 +81,31 @@
             // TODO: clean up this plugin code up.
             window.autosize(form.inputs.description);
 
+            form.inputs.fb_url
+                .on('keyup paste', function(){
+                    $('#btn_facebook').removeClass('bg-light-gray');
+                })
+                .on('blur', function() {
+                    if(this.value == '') {
+                        $('#btn_facebook').addClass('bg-light-gray');
+                    }
+                });
+
             $('#btn_facebook').click(function() {
                 form.getVenueByFacebook(form.inputs.fb_url.val());
             });
 
-            form.inputs.venue_name.blur(function() {
-                $('#btn_map').trigger('click');
-            });
+            form.inputs.street
+                .on('keyup paste', function(){
+                    $('#btn_map').removeClass('bg-light-gray');
+                })
+                .on('blur', function() {
+                    if(this.value == '') {
+                        $('#btn_map').addClass('bg-light-gray');
+                        return;
+                    }
+                    $('#btn_map').trigger('click');
+                });
 
             $('#btn_map').click(function() {
                 var $canvas = $(this).parent().find('#map');

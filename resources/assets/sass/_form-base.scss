@@ -22,6 +22,7 @@ input[type=week] {
     box-sizing: border-box;
     height: $form-field-height;
     padding: $form-field-padding-y $form-field-padding-x;
+    border-radius: $border-radius;
     vertical-align: middle;
     -webkit-appearance: none;
 }
@@ -29,9 +30,9 @@ input[type=week] {
 select {
     box-sizing: border-box;
     padding: $form-field-padding-y $form-field-padding-x;
+    border-radius: $border-radius;
     -moz-appearance: none;
     -webkit-appearance: none;
-    border-radius: 0;
     background: $white url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat;
 }
 
@@ -44,6 +45,7 @@ textarea {
     box-sizing: border-box;
     height: $form-field-height;
     padding: $form-field-padding-y $form-field-padding-x;
+    border-radius: $border-radius;
     resize: vertical;
 }
 

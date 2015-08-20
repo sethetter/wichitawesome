@@ -58,7 +58,7 @@ module.exports = (function($, undefined) {
     var setMap = function(elementId, options) {
         var defaults = {
             center: new google.maps.LatLng(37.699011,-97.3439585),
-            zoom: 14,
+            zoom: 16,
             mapTypeControl: false,
             streetViewControl: false,
             styles: [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#98d8e2"},{"visibility":"on"}]}]
@@ -68,10 +68,17 @@ module.exports = (function($, undefined) {
         map.bounds = new google.maps.LatLngBounds();
         map.markers = [];
         map.setMarker = function(latLng) {
+            var pin = {
+                path: 'M16,0C7.2,0,0,7.2,0,16c0,11.1,9.7,11.8,16,28c6.2-16,16-15.9,16-28C32,7.2,24.8,0,16,0z M16,23 c-3.9,0-7-3.1-7-7c0-3.9,3.1-7,7-7s7,3.1,7,7C23,19.9,19.9,23,16,23z',
+                strokeColor: 'transparent',
+                fillColor: '#ec1d36',
+                fillOpacity: 1,
+                anchor: new google.maps.Point(16,44)
+            };
             this.markers.push(new google.maps.Marker({
                 map: map,
                 position: latLng,
-                icon: '//' + window.location.hostname + '/img/map/pin.svg',
+                icon: pin,
                 animation: google.maps.Animation.DROP
             }));
             this.bounds.extend(latLng);

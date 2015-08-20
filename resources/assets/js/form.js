@@ -151,7 +151,8 @@ var form = {
     getEventByFacebook: function(str) {
 
         if ( ! str) {
-            return true;
+            form.displayError('If the event is on Facebook, paste it\'s URL here, and click the button again.');
+            return;
         }
 
         // if the string is a facebook url
@@ -168,7 +169,7 @@ var form = {
 
         fb.pageToEvent(str)
             .fail(function() {
-                form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. The event might be private, or this website might just be dumb.');
+                form.displayError('<strong>We couldn\'t find that event.</strong> The event might be private, or this website might just be dumb.');
             })
             .done(function(newEvent) {
                 newEvent.start_time = form.format.strToDate(newEvent.start_time);

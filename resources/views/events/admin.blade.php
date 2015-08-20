@@ -9,7 +9,7 @@
     <div class="mb2">
         <a class="btn caps bg-green" href="{{ action('EventController@create') }}">New Event</a>
     </div>
-    <div class="table-container">
+    <div class="col-12 o-auto h5">
         <table>
             <thead>
                 <tr>
