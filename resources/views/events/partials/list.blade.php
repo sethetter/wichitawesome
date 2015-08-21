@@ -8,8 +8,8 @@
                 <span class="blk h2 font-heading">{{ $event->start_time->format('d') }}</span>
                 <span class="blk caps h6 font-heading light-gray">{{ $event->start_time->format('M') }}</span>
             </time>
-            <div class="event-content ml3 px2 o-hidden">
-                <h2 class="mt0 mb1 regular"><a itemprop="url" class="event-name dark-red" href="{{ action('EventController@show', $event->id) }}">{{ $event->name }}</a></h2>
+            <div class="event-content ml3 px2 o-hidden h5">
+                <h2 class="mt0 mb1 regular h4"><a itemprop="url" class="event-name dark-red" href="{{ action('EventController@show', $event->id) }}">{{ $event->name }}</a></h2>
                 <div itemprop="location" itemscope itemtype="http://schema.org/PostalAddress" class="inl-blk mr1">
                     <span class="i i-location"></span> 
                     @if(isset($event->venue->name))
