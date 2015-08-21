@@ -38,10 +38,17 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $e)
-    {
-        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-            return response()->view('errors.500', [], 500);
+    {   
+        // translates 404's 500's into views found in resources/views/errors
+        if ($this->isHttpException($e)){
+            return $this->renderHttpException($e);
         }
-        return parent::render($request, $e);
+
+        // if debug mode show some details about the exception that was thrown
+        if(config('app.debug')){
+            return (new SymfonyDisplayer(true))->createResponse($e);
+        }
+
+        return \Response::view('errors.exception');
     }
 }

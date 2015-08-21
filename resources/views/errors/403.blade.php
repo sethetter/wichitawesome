@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="height:100%;">
     <head>
-        <title>BRB.</title>
+        <title>Page Forbidden.</title>
         <link href='http://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
@@ -13,6 +13,6 @@
                 </object>
             </a>
         </div>
-        <div class="tbl-cell font-heading caps h1 red p3" style="text-shadow: 1px 1px #4c121d;">BRB.</div>
+        <div class="tbl-cell font-heading caps h1 red p3" style="text-shadow: 1px 1px #4c121d;">Hey, you don't have permission to be here.</div>
     </body>
 </html>

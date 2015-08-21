@@ -52,4 +52,14 @@ abstract class Request extends FormRequest
         $input = is_null($this->sanitized) ? $this->all() : $this->sanitized;
         return array_get($input, $key, $default);
     }
+
+    /**
+     * Get the response for a forbidden operation.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forbiddenResponse()
+    {
+        abort(403);
+    }
 }

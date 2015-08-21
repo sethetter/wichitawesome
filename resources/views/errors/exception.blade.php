@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html style="height:100%;">
     <head>
-        <title>Page Not Found.</title>
+        <title>Server Error.</title>
         <link href='http://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
