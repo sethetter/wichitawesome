@@ -24,7 +24,3 @@
         </div>
     </form>
 @endsection
-
-@section('scripts')
-    <script src="{{ asset('js/form.js') }}"></script>
-@endsection

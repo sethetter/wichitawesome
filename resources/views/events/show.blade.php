@@ -15,7 +15,10 @@
             <span class="blk caps h6 font-heading light-gray">{{ $event->start_time->format('M') }}</span>
         </time>
         <div class="event-content ml3 px2 o-hidden h5">
-            <h2 class="event-name mt0 mb1 regular h4"><a itemprop="url" class="event-name dark-red" href="{{ action('EventController@show', $event->id) }}">{{ $event->name }}</a></h2>
+            <h2 class="event-name mt0 mb1 regular h4 dark-red">
+                {{ $event->name }}
+            </h2>
+            <meta itemprop="url" content="{{ action('EventController@show', $event->id) }}">
             <div itemprop="location" itemscope itemtype="http://schema.org/PostalAddress" class="inl-blk mr1">
                 <span class="i i-location"></span> 
                 @if(isset($event->venue->name))
@@ -36,18 +39,6 @@
                 <span class="i i-description dark-red abs l0"></span>
                 {!! $event->displayDesc() !!}
             </div>
-            <div id="map" class="col-12 mb1" style="height:200px;"></div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        $(function(){
-            maps.loadApi().done(function(){
-                var latLng = new google.maps.LatLng({{$event->venue->latitude}}, {{$event->venue->longitude}});
-                maps.setMap('map', {center: latLng}).setMarker(latLng);
-            });
-        });
-    </script>
 @endsection

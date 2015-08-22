@@ -54,7 +54,7 @@
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="facebook">Facebook ID</label>
-                <input type="text" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook', $venue->facebook) }}">
+                <input type="number" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook', $venue->facebook) }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
@@ -64,17 +64,17 @@
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="website">Website</label>
-                <input type="text" class="blk col-12 mb1 field" id="website" name="website" value="{{ old('website', $venue->website) }}">
+                <input type="url" class="blk col-12 mb1 field" id="website" name="website" value="{{ old('website', $venue->website) }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="email">Email</label>
-                <input type="text" class="blk col-12 mb1 field" id="email" name="email" value="{{ old('email', $venue->email) }}">
+                <input type="email" class="blk col-12 mb1 field" id="email" name="email" value="{{ old('email', $venue->email) }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="phone">Phone</label>
-                <input type="text" class="blk col-12 mb1 field" id="phone" name="phone" value="{{ old('phone', $venue->phone) }}">
+                <input type="tel" class="blk col-12 mb1 field" id="phone" name="phone" value="{{ old('phone', $venue->phone) }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
@@ -92,41 +92,4 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('scripts')
-    <script>
-        $(function(){
-            maps.loadApi();
-
-            // TODO: clean up this plugin code up.
-            $(window).load(function() {
-                window.autosize(form.inputs.description);
-            });
-
-            form.inputs.venue_name.blur(function() {
-                $('#btn_map').trigger('click');
-            });
-
-            $('#btn_map').click(function() {
-                var $canvas = $(this).parent().find('#map');
-                var street = form.inputs.street.val();
-                var cachedVenue = cache.get(street);
-
-                if(!$canvas.length) {
-                    $(this).parent().append('<div id="map" class="col-12 mb1" style="height:200px;">');
-                }
-
-                if(cachedVenue != null && cachedVenue.length > 0) {
-                    form.setVenueLocation(cachedVenue);
-                    return;
-                }
-        
-                maps.geocodeToVenue(street + ' Wichita, KS', function(venue){
-                    cache.set(street, venue);
-                    form.setVenueLocation(venue);
-                });
-            });
-        });
-    </script>
 @endsection

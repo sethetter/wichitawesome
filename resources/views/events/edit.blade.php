@@ -21,22 +21,22 @@
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="s_date">Start Date</label>
-                <input type="text" class="blk col-12 mb1 field" id="s_date" name="s_date" value="{{ old('s_date', $event->start_time->format('m/d/Y')) }}">
+                <input type="date" class="blk col-12 mb1 field" id="s_date" name="s_date" value="{{ old('s_date', $event->start_time->format('m/d/Y')) }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="s_time">Start Time</label>
-                <input type="text" class="blk col-12 mb1 field" id="s_time" name="s_time" value="{{ old('s_time', $event->start_time->format('g:i a')) }}">
+                <input type="time" class="blk col-12 mb1 field" id="s_time" name="s_time" value="{{ old('s_time', $event->start_time->format('g:i a')) }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="e_date">End Date</label>
-                <input type="text" class="blk col-12 mb1 field" id="e_date" name="e_date" value="{{ old('e_date', ($event->end_time ? $event->end_time->format('m/d/Y') : '')) }}">
+                <input type="date" class="blk col-12 mb1 field" id="e_date" name="e_date" value="{{ old('e_date', ($event->end_time ? $event->end_time->format('m/d/Y') : '')) }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="e_time">End Time</label>
-                <input type="text" class="blk col-12 mb1 field" id="e_time" name="e_time" value="{{ old('e_time', ($event->end_time ? $event->end_time->format('g:i a') : '')) }}">
+                <input type="time" class="blk col-12 mb1 field" id="e_time" name="e_time" value="{{ old('e_time', ($event->end_time ? $event->end_time->format('g:i a') : '')) }}">
             </div>
 
             <div class="rel mb2 col col-12 px1">
@@ -50,7 +50,7 @@
 
             <div class="rel mb2 col col-12 px1">
                 <label class="caps h5 abs" for="facebook">Facebook</label>
-                <input type="text" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook', $event->facebook) }}">
+                <input type="number" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook', $event->facebook) }}">
             </div>
 
             <div class="rel mb2 col col-12 px1">
@@ -73,14 +73,4 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('js/form.js') }}"></script>
-    <script src="{{ asset('js/autosize.js') }}"></script>
-    <script>
-        $(window).load(function() {
-            window.autosize(form.inputs.description);
-        });
-    </script>
 @endsection

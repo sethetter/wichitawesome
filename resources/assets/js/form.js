@@ -1,4 +1,10 @@
+var $ = require('jquery');
+var autosize = require('autosize');
+var cache = require('./cache');
 var fb = require('./fb');
+var maps = require('./maps');
+require('pickadate');
+require('devbridge-autocomplete');
 
 // TODO: This class needs to be re-factored so that it is more flexible.
 //       The inputs object should be dynamic so that field names can change and 
@@ -66,53 +72,6 @@ var form = {
         evt.initEvent('autosize.update', true, false);
         form.inputs.description[0].dispatchEvent(evt);
     },
-    enable: {
-        dateTime: function() {
-            // build an array of time increments
-            var timeOptions = [];
-            var h = 1;
-            var i = 0;
-
-            for(h = 1; h <= 12; h++) {
-                for(i = 0; i <= 55; i += 5) {
-
-                    // force a 0 before minutes
-                    var t = h + ':' + ('0' + i).slice(-2);
-                    timeOptions.push(t + ' am');
-                    timeOptions.push(t + ' pm');
-                }
-            };
-
-            $('.time-input').autocomplete({
-                minLength: 0,
-                delay: 0,
-                source: function (request, response) {
-                    var matches = $.map(timeOptions, function (option) {
-                        if (option.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
-                            return option;
-                        }
-                    });
-                    response(matches.slice(0, 8));
-                },
-                position: { my: 'center top', at: 'center bottom', collision: 'none' }
-            });
-
-            $('.time-input').each(function(){
-                $(this).autocomplete('instance')._resizeMenu = function() {
-                    var w = this.element.outerWidth();
-                    this.menu.element.outerWidth(w);
-                }
-            });
-
-            $('.date-input').datepicker({ 
-                minDate: 0,
-                prevText: '',
-                nextText: '',
-                onSelect: function () { this.focus(); $(this).parent('div').addClass('field-active'); },
-                onClose: function () { this.focus(); }
-            });
-        },
-    },
     setVenueLocation: function(venue) {
         this.inputs.street.val(venue.street);
         this.inputs.city.val(venue.city);
@@ -169,7 +128,7 @@ var form = {
 
         fb.pageToEvent(str)
             .fail(function() {
-                form.displayError('<strong>We couldn\'t find that event.</strong> The event might be private, or this website might just be dumb.');
+                form.displayError('<strong>We couldn\'t find that event.</strong> The event might be private, or this website might be stupid.');
             })
             .done(function(newEvent) {
                 newEvent.start_time = form.format.strToDate(newEvent.start_time);
@@ -235,7 +194,7 @@ var form = {
 
         fb.pageToVenue(str)
             .fail(function() {
-                form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. The page might be private, or this website might just be dumb.');
+                form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. The page might not be fully open to the public, or this website might be stupid.');
             })
             .done(function(venue) {
 
@@ -256,10 +215,11 @@ var form = {
 
 module.exports = form;
 
+// Setup labels & textareas
 $(window).load(function() {
     form.positionLabels();
+    autosize(form.inputs.description);
 });
-
 $('.field')
     .on('change cut paste input keyup', function() {
         $(this).parent().addClass('field-active');
@@ -269,3 +229,73 @@ $('.field')
             $(this).parent().removeClass('field-active');
         }
     });
+
+// Setup date & time inputs
+$('.date-input').pickadate({format:'dd/mm/yyyy'});
+$('.time-input').pickatime();
+
+// Setup venues autocomplete
+$.getJSON(apiUrl + 'venues', function( data, status, xhr ) {
+    var venues = $.map(data, function (venue) { 
+        return { value: venue.name + ' ' + venue.street, data: venue };
+    });
+    form.inputs.venue_name.autocomplete({
+        lookup: venues,
+        lookupLimit: 3,
+        formatResult: function (suggestion, currentValue) {
+            return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
+        }
+    });
+});
+
+// Setup map inputs
+maps.loadApi();
+
+var mapButton = $('#btn_map');
+var mapInput = mapButton.next().find('input[type="text"]');
+mapInput
+    .on('keyup paste', function(){
+        mapButton.removeClass('bg-light-gray');
+    })
+    .on('blur', function() {
+        if(this.value == '') {
+            mapButton.addClass('bg-light-gray');
+            return;
+        }
+        mapButton.trigger('click');
+    });
+mapButton.click(function(){
+    var $canvas = $(this).parent().find('#map');
+    var street = mapInput.val();
+    var cachedVenue = cache.get(street);
+
+    if(!$canvas.length) {
+        $(this).parent().append('<div id="map" class="col-12 mb1" style="height:200px;">');
+    }
+
+    if(cachedVenue != null && cachedVenue.length > 0) {
+        form.setVenueLocation(cachedVenue);
+        return;
+    }
+
+    maps.geocodeToVenue(street + ' Wichita, KS', function(venue){
+        cache.set(street, venue);
+        form.setVenueLocation(venue);
+    });
+});
+
+// Setup Facebook inputs
+var fbButton = $('#btn_facebook');
+var fbInput = fbButton.next().find('input[type="url"]');
+fbInput
+    .on('keyup paste', function(){
+        fbButton.removeClass('bg-light-gray');
+    })
+    .on('blur', function() {
+        if(this.value == '') {
+            fbButton.addClass('bg-light-gray');
+        }
+    });
+fbButton.click(function() {
+    form.getEventByFacebook(fbInput.val());
+});

@@ -15,7 +15,7 @@
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="email">Email</label>
-                <input type="text" class="blk field col-12" id="email" name="email" value="{{ old('email') }}">
+                <input type="email" class="blk field col-12" id="email" name="email" value="{{ old('email') }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
@@ -32,8 +32,4 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('scripts')
-    <script src="{{ asset('js/form.js') }}"></script>
 @endsection

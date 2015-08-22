@@ -16,12 +16,3 @@
         </div>
     @endif
 @endsection
-
-@section('scripts')
-    <script>
-        scrollawesome();
-        $(function() {
-            scrollFrame('.event-name');
-        });
-    </script>
-@endsection

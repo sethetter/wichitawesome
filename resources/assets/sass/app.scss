@@ -23,6 +23,8 @@
 @import "space-responsive";
 @import "space";
 @import "jquery-ui";
+@import "pickadate/pickadate";
+@import "autocomplete/autocomplete";
 
 html, body {
     height: 100%;
@@ -74,4 +76,9 @@ html, body {
 }
 .event-details {
     padding-left: 1.2em;
+}
+
+.time-input:read-only:not(select),
+.date-input:read-only:not(select) {
+    background: $white;
 }

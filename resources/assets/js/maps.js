@@ -1,3 +1,4 @@
+var jQuery = require('jquery');
 module.exports = (function($, undefined) {
     'use strict';
 

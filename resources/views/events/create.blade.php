@@ -20,22 +20,22 @@
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="s_date">Start Date</label>
-                <input type="text" class="blk col-12 mb1 field date-input" id="s_date" name="s_date" value="{{ old('s_date') }}">
+                <input type="date" class="blk col-12 mb1 field date-input" id="s_date" name="s_date" value="{{ old('s_date') }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="s_time">Start Time</label>
-                <input type="text" class="blk col-12 mb1 field time-input" id="s_time" name="s_time" value="{{ old('s_time') }}">
+                <input type="time" class="blk col-12 mb1 field time-input" id="s_time" name="s_time" value="{{ old('s_time') }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="e_date">End Date</label>
-                <input type="text" class="blk col-12 mb1 field date-input" id="e_date" name="e_date" value="{{ old('e_date') }}">
+                <input type="date" class="blk col-12 mb1 field date-input" id="e_date" name="e_date" value="{{ old('e_date') }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="e_time">End Time</label>
-                <input type="text" class="blk col-12 mb1 field time-input" id="e_time" name="e_time" value="{{ old('e_time') }}">
+                <input type="time" class="blk col-12 mb1 field time-input" id="e_time" name="e_time" value="{{ old('e_time') }}">
             </div>
 
             <div class="rel mb2 col col-12 px1">
@@ -54,7 +54,7 @@
 
             <div class="rel mb2 col col-12 px1">
                 <label class="caps h5 abs" for="facebook">Facebook</label>
-                <input type="text" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook') }}">
+                <input type="number" class="blk col-12 mb1 field" id="facebook" name="facebook" value="{{ old('facebook') }}">
             </div>
 
             <div class="rel mb2 col col-12 px1">
@@ -72,15 +72,4 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('scripts')
-    <script>
-        $(function() {
-            // TODO: clean up this plugin code up.
-            window.autosize(form.inputs.description);
-
-            form.enable.dateTime();
-        });
-    </script>
 @endsection

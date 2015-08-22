@@ -1,10 +1,12 @@
-require('./vendor/jquery-ui.min');
-
-window.cache = require('./cache');
-window.maps = require('./maps');
-window.form = require('./form');
-window.autosize = require('./vendor/autosize');
-window.scrollFrame = require('./vendor/scroll-frame');
-window.scrollawesome = require('./scrollawesome');
-
 window.apiUrl = 'http://'+ window.location.hostname +'/api/';
+
+var $ = require('jquery');
+var scrollawesome = require('./scrollawesome');
+var scrollFrame = require('scroll-frame');
+
+if($('#event_list').length > 0) {
+    scrollawesome();
+    scrollFrame('.event-name');
+}
+
+require('./form');

@@ -36,10 +36,3 @@
         </div>
     </form>
 @endsection
-
-@section('scripts')
-    <script>
-        // TODO: clean up this plugin code up.
-        window.autosize(form.inputs.description);
-    </script>
-@endsection

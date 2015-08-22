@@ -26,7 +26,7 @@ label {
 }
 
 .field:invalid {
-    border-color: $red;
+    border-color: $dark-red;
 }
 
 .field.success {
@@ -38,7 +38,7 @@ label {
 }
 
 .field.error {
-    border-color: $red;
+    border-color: $dark-red;
 }
 
 .field-active label {
