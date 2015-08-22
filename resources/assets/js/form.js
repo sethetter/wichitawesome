@@ -68,9 +68,7 @@ var form = {
     expandDescription: function() {
 
         // trigger textarea keyup so it expands
-        var evt = document.createEvent('Event');
-        evt.initEvent('autosize.update', true, false);
-        form.inputs.description[0].dispatchEvent(evt);
+        autosize.update(form.inputs.description[0]);
     },
     setVenueLocation: function(venue) {
         this.inputs.street.val(venue.street);

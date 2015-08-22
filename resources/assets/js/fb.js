@@ -1,3 +1,4 @@
+var $ = require('jquery');
 module.exports = {
     version: 'v2.4',
     token: '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA',

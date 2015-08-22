@@ -6,7 +6,7 @@
 @section('container', 'container')
 
 @section('content')
-    <h2 class="mt0">Show us whatcha' got.</h2>
+    <h2 class="mt0 mb3">Show us whatcha' got.</h2>
     <form method="post" action="{{ action('EventController@collect') }}">
         <div class="form-head">
             @include('errors.form')

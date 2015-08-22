@@ -6,8 +6,8 @@
 @section('container', 'container')
 
 @section('content')
-    <h2 class="mt0">Let's email-hangout.</h2>
-    <p>We're working everyday to make this little slice of the interwebs the best it can be. Let us know if we can make something better, or send us some looooovvvveeee.
+    <h2 class="mt0">You can email us, we're like BFFs now.</h2>
+    <p>We put a lot of hours into making this little slice of the interwebs the best it can be. Let us know if we can make something better. If we're doing something right, you could always send us a poem.</p>
     <form method="post" action="{{ action('FeedbackController@send') }}">
         <div class="form-head">
             @include('errors.form')

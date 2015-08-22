@@ -14083,8 +14083,6 @@ module.exports = require('./scroll-frame');
 window.apiUrl = 'http://' + window.location.hostname + '/api/';
 
 var $ = require('jquery');
-require('./form');
-
 var scrollawesome = require('./scrollawesome');
 var scrollFrame = require('scroll-frame');
 
@@ -14092,6 +14090,8 @@ if ($('#event_list').length > 0) {
     scrollawesome();
     scrollFrame('.event-name');
 }
+
+require('./form');
 
 },{"./form":13,"./scrollawesome":15,"jquery":3,"scroll-frame":8}],11:[function(require,module,exports){
 "use strict";
@@ -14112,6 +14112,7 @@ module.exports = {
 },{}],12:[function(require,module,exports){
 'use strict';
 
+var $ = require('jquery');
 module.exports = {
     version: 'v2.4',
     token: '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA',
@@ -14127,7 +14128,7 @@ module.exports = {
     }
 };
 
-},{}],13:[function(require,module,exports){
+},{"jquery":3}],13:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -14200,9 +14201,7 @@ var form = {
     expandDescription: function expandDescription() {
 
         // trigger textarea keyup so it expands
-        var evt = document.createEvent('Event');
-        evt.initEvent('autosize.update', true, false);
-        form.inputs.description[0].dispatchEvent(evt);
+        autosize.update(form.inputs.description[0]);
     },
     setVenueLocation: function setVenueLocation(venue) {
         this.inputs.street.val(venue.street);
