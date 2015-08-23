@@ -80,6 +80,7 @@ class CollectRequest extends Request
     public function messages()
     {
         return [
+            'facebook.unique' => 'Good news: That event is already listed! Bad news: You just wasted your time. We\'ll let you now when we\'ve worked out the quirks in our time machine so you can get it back.',
             'street.required' => 'The location is invalid. There is missing street data.',
             'city.required' => 'The location is invalid. There is missing city data.',
             'state.required' => 'The location is invalid. There is missing state data.',
