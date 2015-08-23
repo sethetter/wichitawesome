@@ -29,7 +29,7 @@ class FacebookEventFetcher
         foreach($this->venues as $venue)
         {
             $this->storeEventsForVenue($venue);
-            sleep(5);
+            sleep(1);
         }
     }
 
