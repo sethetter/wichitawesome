@@ -17,7 +17,7 @@
                 <button type="button" class="btn right bg-light-gray" id="btn_facebook">Pull Facebook Info</button>
                 <div class="o-hidden">
                     <label class="caps h5 abs" for="fb_url">Facebook URL</label>
-                    <input type="url" class="blk col-12 mb1 field" id="fb_url" name="fb_url" value="{{ old('fb_url') }}">
+                    <input type="url" data-url="fb-page" class="blk col-12 mb1 field" id="fb_url" name="fb_url" value="{{ old('fb_url') }}">
                 </div>
             </div>
 

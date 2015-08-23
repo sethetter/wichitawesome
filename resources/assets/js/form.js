@@ -194,7 +194,7 @@ var form = {
 
         fb.pageToVenue(str)
             .fail(function() {
-                form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. The page might not be fully open to the public, or this website might be stupid.');
+                form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. That page might not be fully open to the public, or this website might be stupid.');
             })
             .done(function(venue) {
 
@@ -297,5 +297,9 @@ fbInput
         }
     });
 fbButton.click(function() {
-    form.getEventByFacebook(fbInput.val());
+    if (fbInput.data('url') === 'fb-page') {
+        form.getVenueByFacebook(fbInput.val());
+    } else {
+        form.getEventByFacebook(fbInput.val());
+    }
 });

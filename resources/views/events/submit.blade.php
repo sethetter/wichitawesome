@@ -17,7 +17,7 @@
             <div class="rel mb2 col col-12 px1">
                 <button type="button" class="btn caps right bg-light-gray" id="btn_facebook">Pull Info</button>
                 <div class="o-hidden">
-                    <label for="fb_url" class="caps h5 abs">Facebook URL</label>
+                    <label for="fb_url"  data-url="fb-event" class="caps h5 abs">Facebook URL</label>
                     <input type="url" class="blk field col-12" id="fb_url" name="fb_url" value="{{ old('fb_url') }}" autofocus>
                     <input type="hidden" id="facebook" name="facebook" value="{{ old('facebook') }}">
                 </div>

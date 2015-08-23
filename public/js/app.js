@@ -14304,7 +14304,7 @@ var form = {
         };
 
         fb.pageToVenue(str).fail(function () {
-            form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. The page might not be fully open to the public, or this website might be stupid.');
+            form.displayError('<strong>Sorry!</strong> We couldn\'t find any info. That page might not be fully open to the public, or this website might be stupid.');
         }).done(function (venue) {
 
             cache.set(str, venue);
@@ -14400,7 +14400,11 @@ fbInput.on('keyup paste', function () {
     }
 });
 fbButton.click(function () {
-    form.getEventByFacebook(fbInput.val());
+    if (fbInput.data('url') === 'fb-page') {
+        form.getVenueByFacebook(fbInput.val());
+    } else {
+        form.getEventByFacebook(fbInput.val());
+    }
 });
 
 },{"./cache":10,"./fb":11,"./maps":13,"autosize":1,"devbridge-autocomplete":2,"jquery":3,"pickadate/lib/picker":5,"pickadate/lib/picker.date":4,"pickadate/lib/picker.time":6}],13:[function(require,module,exports){
