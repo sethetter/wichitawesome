@@ -10403,26 +10403,6 @@ return jQuery;
 }));
 
 },{}],4:[function(require,module,exports){
-//This code is a simple adaptation from the index.js file in CrytoJS node module
-(function (root, factory, undef) {
-  if (typeof exports === "object") {
-    // CommonJS
-    module.exports = exports = factory(require('./picker'), require('./picker.date'), require('./picker.time'));
-  }
-  else if (typeof define === "function" && define.amd) {
-    // AMD
-    define(['./picker','./picker.date', './picker.time'], factory);
-  }
-  else {
-    // Global (browser)
-    factory(root.Picker);
-  }
-}(this, function (Picker) {
-
-  return Picker;
-
-}));
-},{"./picker":6,"./picker.date":5,"./picker.time":7}],5:[function(require,module,exports){
 /*!
  * Date picker for pickadate.js v3.5.6
  * http://amsul.github.io/pickadate.js/date.htm
@@ -11778,7 +11758,7 @@ Picker.extend( 'pickadate', DatePicker )
 
 
 
-},{"./picker.js":6,"jquery":3}],6:[function(require,module,exports){
+},{"./picker.js":5,"jquery":3}],5:[function(require,module,exports){
 /*!
  * pickadate.js v3.5.6, 2015/04/20
  * By Amsul, http://amsul.ca
@@ -12943,7 +12923,7 @@ return PickerConstructor
 
 
 
-},{"jquery":3}],7:[function(require,module,exports){
+},{"jquery":3}],6:[function(require,module,exports){
 /*!
  * Time picker for pickadate.js v3.5.6
  * http://amsul.github.io/pickadate.js/time.htm
@@ -13958,10 +13938,10 @@ Picker.extend( 'pickatime', TimePicker )
 
 
 
-},{"./picker.js":6,"jquery":3}],8:[function(require,module,exports){
+},{"./picker.js":5,"jquery":3}],7:[function(require,module,exports){
 module.exports = require('./scroll-frame');
 
-},{"./scroll-frame":9}],9:[function(require,module,exports){
+},{"./scroll-frame":8}],8:[function(require,module,exports){
 (function() {
 
   // Ignore for unsupported browsers
@@ -14077,7 +14057,7 @@ module.exports = require('./scroll-frame');
   }
 })();
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 window.apiUrl = 'http://' + window.location.hostname + '/api/';
@@ -14093,7 +14073,7 @@ if ($('#event_list').length > 0) {
 
 require('./form');
 
-},{"./form":13,"./scrollawesome":15,"jquery":3,"scroll-frame":8}],11:[function(require,module,exports){
+},{"./form":12,"./scrollawesome":14,"jquery":3,"scroll-frame":7}],10:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -14109,7 +14089,7 @@ module.exports = {
     }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -14128,7 +14108,7 @@ module.exports = {
     }
 };
 
-},{"jquery":3}],13:[function(require,module,exports){
+},{"jquery":3}],12:[function(require,module,exports){
 'use strict';
 
 var $ = require('jquery');
@@ -14136,7 +14116,9 @@ var autosize = require('autosize');
 var cache = require('./cache');
 var fb = require('./fb');
 var maps = require('./maps');
-require('pickadate');
+require('pickadate/lib/picker');
+require('pickadate/lib/picker.date');
+require('pickadate/lib/picker.time');
 require('devbridge-autocomplete');
 
 // TODO: This class needs to be re-factored so that it is more flexible.
@@ -14421,7 +14403,7 @@ fbButton.click(function () {
     form.getEventByFacebook(fbInput.val());
 });
 
-},{"./cache":11,"./fb":12,"./maps":14,"autosize":1,"devbridge-autocomplete":2,"jquery":3,"pickadate":4}],14:[function(require,module,exports){
+},{"./cache":10,"./fb":11,"./maps":13,"autosize":1,"devbridge-autocomplete":2,"jquery":3,"pickadate/lib/picker":5,"pickadate/lib/picker.date":4,"pickadate/lib/picker.time":6}],13:[function(require,module,exports){
 'use strict';
 
 var jQuery = require('jquery');
@@ -14562,7 +14544,7 @@ module.exports = (function ($, undefined) {
     };
 })(jQuery);
 
-},{"jquery":3}],15:[function(require,module,exports){
+},{"jquery":3}],14:[function(require,module,exports){
 "use strict";
 
 module.exports = function (undefined) {
@@ -14678,4 +14660,4 @@ module.exports = function (undefined) {
     loop();
 };
 
-},{}]},{},[10]);
+},{}]},{},[9]);

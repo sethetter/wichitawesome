@@ -3,7 +3,9 @@ var autosize = require('autosize');
 var cache = require('./cache');
 var fb = require('./fb');
 var maps = require('./maps');
-require('pickadate');
+require('pickadate/lib/picker');
+require('pickadate/lib/picker.date');
+require('pickadate/lib/picker.time');
 require('devbridge-autocomplete');
 
 // TODO: This class needs to be re-factored so that it is more flexible.
