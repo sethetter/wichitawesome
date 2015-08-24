@@ -2,7 +2,6 @@
 
 namespace ICT\Services;
 
-use ICT\Venue;
 use ICT\Event;
 
 use Illuminate\Http\Response;
@@ -15,24 +14,6 @@ class FacebookEventFetcher
     protected $access_token = '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA';
     protected $fields = ['name', 'description', 'start_time', 'end_time', 'updated_time'];
 
-    protected $venues = [];
-
-    public function __construct()
-    {
-        if(\Schema::hasTable('venues')) {
-            $this->venues = Venue::where('facebook', '!=', 0)->get();
-        }
-    }
-
-    public function storeEvents()
-    {
-        foreach($this->venues as $venue)
-        {
-            $this->storeEventsForVenue($venue);
-            sleep(1);
-        }
-    }
-
     public function storeEventsForVenue($venue)
     {
         $now = time();
@@ -40,9 +21,9 @@ class FacebookEventFetcher
         $fields = implode(',', $this->fields);
         $url = "https://graph.facebook.com/{$this->version}/{$venue->facebook}/events?since={$now}&fields={$fields}&access_token={$this->access_token}";
 
-        $response = file_get_contents($url);
-        if ($response === false) {
-            throw new Exception('Stream returned an empty response', 660);
+
+        if ( ($response = file_get_contents($url)) === false ) {
+            throw new \Exception('Unable to fetch '. $url);
         }
 
         $events = json_decode($response)->data;
