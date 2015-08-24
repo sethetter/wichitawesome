@@ -38,6 +38,8 @@
 <body>
     @if(Session::has('message'))
         <div class="p2 center bg-green white font-heading">{!! Session::get('message') !!}</div>
+    @else
+        <div class="p1 center bg-dark-red light-blue font-heading h6"><small><strong>We're in beta!</strong> <a class="light-blue underline" href="{{ url('feedback') }}">Let us know if you find anything weird.</a></small></div>
     @endif
     <div class="main">
         <div class="main-content">
