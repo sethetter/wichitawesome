@@ -14,6 +14,8 @@ use ICT\Http\Requests\DestroyRequest;
 use ICT\Http\Controllers\Controller;
 use ICT\Venue;
 
+use Cache;
+
 class EventController extends Controller
 {
     /**
@@ -34,7 +36,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        $data['events'] = Event::with('venue')->upcoming()->simplePaginate(10);
+        $data['events'] = Cache::remember('events', 30, function() {
+             return Event::with('venue')->upcoming()->simplePaginate(10);
+        });
         return view('events.index', $data);
     }
 
