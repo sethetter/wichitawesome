@@ -26,7 +26,7 @@
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="s_time">Start Time</label>
-                <input type="time" class="blk col-12 mb1 field" id="s_time" name="s_time" value="{{ old('s_time', $event->start_time->format('g:i a')) }}">
+                <input type="time" class="blk col-12 mb1 field" id="s_time" name="s_time" value="{{ old('s_time', $event->start_time->format('g:i A')) }}">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
@@ -36,7 +36,7 @@
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label class="caps h5 abs" for="e_time">End Time</label>
-                <input type="time" class="blk col-12 mb1 field" id="e_time" name="e_time" value="{{ old('e_time', ($event->end_time ? $event->end_time->format('g:i a') : '')) }}">
+                <input type="time" class="blk col-12 mb1 field" id="e_time" name="e_time" value="{{ old('e_time', ($event->end_time ? $event->end_time->format('g:i A') : '')) }}">
             </div>
 
             <div class="rel mb2 col col-12 px1">

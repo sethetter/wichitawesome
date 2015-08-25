@@ -91,14 +91,14 @@ class Event extends Model
             if($this->start_time > new \DateTime) {
                 // has specific end
                 if( $this->end_time->format('gi') != '1159' ) {
-                    return $this->start_time->format('g:ia').' - '.$this->end_time->format('g:ia');
+                    return $this->start_time->format('g:i A').' - '.$this->end_time->format('g:i A');
                 } else {
-                    return $this->start_time->format('g:ia');
+                    return $this->start_time->format('g:i A');
                 }
             } else {
                 // has specific end
                 if( $this->end_time->format('gi') != '1159' ) {
-                    return 'Until '.$this->end_time->format('g:ia');
+                    return 'Until '.$this->end_time->format('g:i A');
                 } else {
                     return 'Happening Now';
                 }
@@ -106,7 +106,7 @@ class Event extends Model
         }
         else
         {
-            return  $this->start_time->format('g:ia').' - '.$this->end_time->format('g:ia \o\n M d');
+            return  $this->start_time->format('g:i A').' - '.$this->end_time->format('g:i A \o\n M d');
         }
     }
 

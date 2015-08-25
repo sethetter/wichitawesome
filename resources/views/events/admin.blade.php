@@ -30,8 +30,8 @@
                     <tr>
                         <td>{{ $event->id }}</td>
                         <td><a href="{{ action('EventController@edit', $event->id) }}">{{ $event->name }}</a></td>
-                        <td class="nowrap">{{ $event->start_time->format('m/d/Y g:i a') }}</td>
-                        <td class="nowrap">{{ $event->end_time ? $event->end_time->format('m/d/Y g:i a') : '' }}</td>
+                        <td class="nowrap">{{ $event->start_time->format('m/d/Y g:i A') }}</td>
+                        <td class="nowrap">{{ $event->end_time ? $event->end_time->format('m/d/Y g:i A') : '' }}</td>
                         <td><a href="{{ action('VenueController@edit', $event->venue->id) }}">{{ $event->venue->name }}</a></td>
                         <td class="center tbl-cell">
                             @if($event->facebook)

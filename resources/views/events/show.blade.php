@@ -8,7 +8,7 @@
 @section('content')
     <?php $now = date('Yjn'); ?>
     <div itemscope itemtype="http://schema.org/Event" class="event mb4">
-        <time datetime="{{ $event->start_time->format('c') }}" class="event-date bold bg-white m0 center regular left {{ $event->start_time->format('Yjn') == $now ? 'red' : '' }}" title="{{ $event->start_time->format('g:ia \o\n D, M d, Y') }}">
+        <time datetime="{{ $event->start_time->format('c') }}" class="event-date bold bg-white m0 center regular left {{ $event->start_time->format('Yjn') == $now ? 'red' : '' }}" title="{{ $event->start_time->format('g:i A \o\n D, M d, Y') }}">
             <meta itemprop="startDate" content="{{ $event->start_time->format('c') }}">
             <span class="blk caps h6 font-heading">{{ $event->start_time->format('D') }}</span>
             <span class="blk h2 font-heading">{{ $event->start_time->format('d') }}</span>
