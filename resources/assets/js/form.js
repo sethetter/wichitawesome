@@ -231,7 +231,7 @@ $('.field')
     });
 
 // Setup date & time inputs
-$('.date-input').pickadate({format:'dd/mm/yyyy'});
+$('.date-input').pickadate({format:'mm/dd/yyyy'});
 $('.time-input').pickatime();
 
 // Setup venues autocomplete
