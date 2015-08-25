@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class FacebookEventFetcher 
 {
     protected $version = 'v2.4';
-    protected $access_token = '1450071418617846|xH9wnEYA25GVQYGBfgHGYJfWGaA';
+    protected $access_token = 'CAAUm1QZCOPZCYBAEDiWXtB3jwyZAFfCKgNzTN4c8U9qA5ZBBQgnwVzUJye6P64Frbn04aRZAFkFZB4a8tR86gNoPCukFCBq8MmbMD7PzSE2WpiSjZBI6lnsHqCAvkW0uj4BoIt2H0QOqhIERyZBtvZCZCyafddl9Q4BUGZAFrNztiN9uHOthZCLBoWIa';
     protected $fields = ['name', 'description', 'start_time', 'end_time', 'updated_time'];
 
     public function storeEventsForVenue($venue)
