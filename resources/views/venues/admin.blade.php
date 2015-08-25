@@ -36,10 +36,10 @@
                         <td>{{ $venue->street }}</td>
                         <td>{{ $venue->city }}</td>
                         <td>{{ $venue->state }}</td>
-                        <td>{{ $venue->zip }}</td>
+                        <td class="nowrap">{{ $venue->zip }}</td>
                         <td class="center">
                             @if($venue->facebook)
-                                <a target="_blank" href="https://facebook.com/events/{{ $venue->facebook }}"><svg class="i"><use xlink:href="#icon-launch"></use></svg></a>
+                                <a target="_blank" href="https://facebook.com/{{ $venue->facebook }}"><svg class="i"><use xlink:href="#icon-launch"></use></svg></a>
                             @endif
                         </td>
                         <td>
