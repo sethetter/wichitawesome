@@ -33,7 +33,7 @@
                             <form method="post" action="{{  action('UserController@destroy',$user->id) }}" onsubmit="return confirm('You definitely want to delete this user?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />
-                                <button type="submit" class="btn bg-dark-red p1"><span class="i i-delete h2"></span></button>
+                                <button type="submit" class="dark-red" style="padding:0;background:none;"><svg class="i"><use xlink:href="#icon-bomb"></use></svg></button>
                             </form>
                         </td>
                     </tr>

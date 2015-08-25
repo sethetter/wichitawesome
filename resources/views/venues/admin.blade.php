@@ -37,23 +37,43 @@
                         <td>{{ $venue->city }}</td>
                         <td>{{ $venue->state }}</td>
                         <td>{{ $venue->zip }}</td>
-                        <td>{{ $venue->facebook }}</td>
-                        <td>{{ $venue->twitter }}</td>
-                        <td>{{ $venue->website }}</td>
-                        <td>{{ $venue->email }}</td>
-                        <td class="nowrap">{{ $venue->phone }}</td>
+                        <td class="center">
+                            @if($venue->facebook)
+                                <a target="_blank" href="https://facebook.com/events/{{ $venue->facebook }}"><svg class="i"><use xlink:href="#icon-launch"></use></svg></a>
+                            @endif
+                        </td>
+                        <td>
+                            @if($venue->twitter)
+                                <a target="_blank" href="https://twitter.com/{{ $venue->twitter }}">{{ '@'.$venue->twitter }}</a>
+                            @endif
+                        </td>
+                        <td>
+                            @if($venue->website)
+                                <a target="_blank" href="{{ $venue->website }}">{{ $venue->website }}</a>
+                            @endif
+                        </td>
+                        <td class="center">
+                            @if($venue->email)
+                                <a target="_blank" href="mailto:{{ $venue->email }}"><svg class="i"><use xlink:href="#icon-mail"></use></svg></a>
+                            @endif
+                        </td>
+                        <td class="nowrap">
+                            @if($venue->phone)
+                                <a target="_blank" href="tel:{{ $venue->phone }}">{{ $venue->phone }}</a>
+                            @endif
+                        </td>
                         <td class="center">
                             @if($venue->visible)
-                                <span class="green i i-visibility h2"></span>
+                                <a target="_blank" href="{{ action('VenueController@show',$venue->id) }}"><svg class="green i"><use xlink:href="#icon-visibility"></use></svg></a>
                             @else
-                                <span class="red i i-visibility-off h2"></span>
+                                <svg class="red i"><use xlink:href="#icon-visibility-off"></use></svg>
                             @endif
                         </td>
                         <td class="nowrap">
                             <form class="inl-blk" method="post" action="{{  action('VenueController@destroy',$venue->id) }}" onsubmit="return confirm('You definitely want to delete this venue?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />
-                                <button type="submit" class="btn bg-dark-red p1"><span class="i i-delete h2"></span></button>
+                                <button type="submit" class="dark-red" style="padding:0;background:none;"><svg class="i"><use xlink:href="#icon-bomb"></use></svg></button>
                             </form>
                         </td>
                     </tr>

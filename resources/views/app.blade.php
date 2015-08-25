@@ -36,6 +36,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    @include('icons')
     @if(Session::has('message'))
         <div class="p2 center bg-green white font-heading">{!! Session::get('message') !!}</div>
     @else

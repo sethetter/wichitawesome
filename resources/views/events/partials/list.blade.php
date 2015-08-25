@@ -11,7 +11,7 @@
             <div class="event-content ml3 px2 o-hidden h5">
                 <h2 class="mt0 mb1 regular h4"><a itemprop="url" class="event-name dark-red" href="{{ action('EventController@show', $event->id) }}">{{ $event->name }}</a></h2>
                 <div itemprop="location" itemscope itemtype="http://schema.org/PostalAddress" class="inl-blk mr1">
-                    <span class="i i-location"></span> 
+                    <svg class="i"><use xlink:href="#icon-location"></use></svg>
                     @if(isset($event->venue->name))
                         <a class="event-venue" target="_blank" href="https://www.google.com/maps/dir/Current+Location/{{ $event->venue->latitude }},{{ $event->venue->longitude }}" title="{{ $event->venue->address() }}">{{ $event->venue->name }}</a>
                         <meta itemprop="streetAddress" content="{{ $event->venue->street }}">
@@ -23,9 +23,9 @@
                     <meta itemprop="postalCode" content="{{ $event->venue->zip }}">
                 </div>
                 <div class="inl-blk">
-                    <span class="i i-clock black"></span> {{ $event->displayTime() }}
+                    <svg class="i"><use xlink:href="#icon-clock"></use></svg> {{ $event->displayTime() }}
                 </div>
-                <div><span class="i i-facebook"></span> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
+                <div><svg class="i"><use xlink:href="#icon-facebook"></use></svg> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
             </div>
         </div>
     @endforeach

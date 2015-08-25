@@ -1,6 +1,5 @@
 @import "normalize";
 @import "variables";
-@import "icon";
 @import "background-image";
 @import "border";
 @import "button-base";
@@ -22,7 +21,6 @@
 @import "typography-utility";
 @import "space-responsive";
 @import "space";
-@import "jquery-ui";
 @import "pickadate/pickadate";
 @import "autocomplete/autocomplete";
 
@@ -38,6 +36,12 @@ html, body {
 }
 .foot {
     height: 1.5rem;
+}
+
+.i {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
 }
 
 .font-body { font-family: $font-family }
