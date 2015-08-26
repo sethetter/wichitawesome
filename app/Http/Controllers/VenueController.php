@@ -51,9 +51,10 @@ class VenueController extends Controller
      *
      * @return Response
      */
-    public function submit()
+    public function submit(Request $request)
     {
-        return view('venues.submit');
+        $data['fb_url'] = $request->fb_url;
+        return view('venues.submit', $data);
     }
 
     /**

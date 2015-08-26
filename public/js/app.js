@@ -14338,7 +14338,7 @@ $('.field').on('change cut paste input keyup', function () {
 });
 
 // Setup date & time inputs
-$('.date-input').pickadate({ format: 'dd/mm/yyyy' });
+$('.date-input').pickadate({ format: 'mm/dd/yyyy' });
 $('.time-input').pickatime();
 
 // Setup venues autocomplete
@@ -14392,6 +14392,11 @@ mapButton.click(function () {
 // Setup Facebook inputs
 var fbButton = $('#btn_facebook');
 var fbInput = fbButton.next().find('input[type="url"]');
+$(window).load(function () {
+    if (form.inputs.fb_url.val()) {
+        fbButton.trigger('click');
+    }
+});
 fbInput.on('keyup paste', function () {
     fbButton.removeClass('bg-light-gray');
 }).on('blur', function () {

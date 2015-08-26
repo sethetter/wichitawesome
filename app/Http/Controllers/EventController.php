@@ -63,9 +63,11 @@ class EventController extends Controller
      *
      * @return Response
      */
-    public function submit()
+    public function submit(Request $request)
     {
         $data['venues'] = Venue::all();
+        $data['fb_url'] = $request->fb_url;
+        dd($request->fb_url);
         return view('events.submit', $data);
     }
 
