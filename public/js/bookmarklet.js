@@ -1,1 +1,0 @@
-window.open(window.location.href.indexOf("/events/")>-1?"http://wichitaweso.me/events/submit?fb_url="+window.location.href:"http://wichitaweso.me/venues/submit?fb_url="+window.location.href);
