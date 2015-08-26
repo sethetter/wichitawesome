@@ -67,7 +67,6 @@ class EventController extends Controller
     {
         $data['venues'] = Venue::all();
         $data['fb_url'] = $request->fb_url;
-        dd($request->fb_url);
         return view('events.submit', $data);
     }
 
