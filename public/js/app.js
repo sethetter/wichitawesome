@@ -14393,9 +14393,11 @@ mapButton.click(function () {
 var fbButton = $('#btn_facebook');
 var fbInput = fbButton.next().find('input[type="url"]');
 $(window).load(function () {
-    if (form.inputs.fb_url.val()) {
-        fbButton.trigger('click');
-    }
+    setTimeout(function () {
+        if (form.inputs.fb_url.val()) {
+            fbButton.trigger('click');
+        }
+    }, 20);
 });
 fbInput.on('keyup paste', function () {
     fbButton.removeClass('bg-light-gray');
