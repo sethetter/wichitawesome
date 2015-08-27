@@ -2,7 +2,7 @@
 <html style="height:100%;">
     <head>
         <title>BRB.</title>
-        <link href='http://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="tbl bg-light-blue center rel" style="height:100%;">

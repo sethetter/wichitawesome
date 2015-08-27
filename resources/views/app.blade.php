@@ -32,7 +32,7 @@
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <link href='http://fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Domine:400,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -64,7 +64,7 @@
                         @endif
                         <li class="inl-blk"><a class="blx px1 light h6 white caps {{ ( Request::is('events/submit') ) ? 'red' : '' }}" href="{{ url('events/submit') }}">Add Event</a></li>
                         <li class="inl-blk"><a class="blx px1 light h6 white caps {{ ( Request::is('feedback') ) ? 'red' : '' }}" href="{{ url('feedback') }}">Feedback</a></li>
-                        <li class="inl-blk"><a class="blx px1 light h6 white caps" href="http://blog.wichitaweso.me">Blog</a></li>
+                        <li class="inl-blk"><a class="blx px1 light h6 white caps" href="//blog.wichitaweso.me">Blog</a></li>
                     </ul>
                 </nav>
             </div>

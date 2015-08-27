@@ -117,7 +117,7 @@ img {
                         <br><br>
 
                         <strong>Wichitawesome</strong><br>
-                        <a href="http://wichitaweso.me" style="color:#aaaaaa">wichitaweso.me</a><br>
+                        <a href="//wichitaweso.me" style="color:#aaaaaa">wichitaweso.me</a><br>
                         <small>Submitted at {{ date('g:ia \o\n m/d/Y') }}</small><br>
 
                         <br><br>

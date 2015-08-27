@@ -14060,7 +14060,7 @@ module.exports = require('./scroll-frame');
 },{}],9:[function(require,module,exports){
 'use strict';
 
-window.apiUrl = 'http://' + window.location.hostname + '/api/';
+window.apiUrl = '//' + window.location.hostname + '/api/';
 
 var $ = require('jquery');
 var scrollawesome = require('./scrollawesome');
