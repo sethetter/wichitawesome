@@ -140,27 +140,32 @@ var form = {
 
                 // Check if there is a Facebook venue
                 if (newEvent.place) {
-                    // Check if we have a matching venue in our database
-                    // TODO: Check the cache before hitting the ICT API
-                    $.getJSON(apiUrl + 'venues', {'facebook': newEvent.place.id}, function( venues, status, xhr ) {
-                        // If an array of venues was returned set the first
-                        if(venues.length > 0) {
-                            form.inputs.venue_name.val(venues[0].street).parent().addClass('field-active');
-                            form.inputs.venue_id.val(venues[0].id);
-                            form.setVenueLocation(venues[0]);
-                        } else {
-                            // If no matches in our database geocode the facebook info
-                            form.inputs.venue_name.val(newEvent.place.name).parent().addClass('field-active');
-                            form.inputs.venue_facebook.val(newEvent.place.id);
-                            if(newEvent.place.location) {
-                                form.setVenueLocation(newEvent.place.location);
-                            } else {
-                                maps.geocodeToVenue(newEvent.place.name + ' Wichita, KS', function(venue){
-                                    form.setVenueLocation(venue);
-                                });
-                            }
+                    // Check if we have a matching venue in our venues array
+                    var match = null;
+                    $.each(venues, function(index, venue) {
+                        if(newEvent.place.name.toLowerCase().indexOf(venue.data.name.toLowerCase()) > -1) {
+                            match = venue.data;
+                            return false;
                         }
                     });
+                    // If a match was found, use it
+                    if(match) {
+                        form.inputs.venue_name.val(match.street).parent().addClass('field-active');
+                        form.inputs.venue_id.val(match.id);
+                        form.setVenueLocation(match);
+                    } else {
+                        // If no matches in our database geocode the facebook info
+                        form.inputs.venue_name.val(newEvent.place.name).parent().addClass('field-active');
+                        // TODO: This might be a problem if place.id does not exists
+                        form.inputs.venue_facebook.val(newEvent.place.id);
+                        if(newEvent.place.location) {
+                            form.setVenueLocation(newEvent.place.location);
+                        } else {
+                            maps.geocodeToVenue(newEvent.place.name + ' Wichita, KS', function(venue){
+                                form.setVenueLocation(venue);
+                            });
+                        }
+                    }
                 }
             });
     },
@@ -188,8 +193,10 @@ var form = {
             form.inputs.phone.val(cachedVenue.phone);
             form.inputs.website.val(cachedVenue.website);
             form.inputs.description.val(cachedVenue.about);
-
-            form.setVenueLocation(cachedVenue.location);
+            // Organizations will not have locations
+            if(venue.location) {
+                form.setVenueLocation(cachedVenue.location);
+            }
         };
 
         fb.pageToVenue(str)
@@ -205,8 +212,10 @@ var form = {
                 form.inputs.phone.val(venue.phone);
                 form.inputs.website.val(venue.website);
                 form.inputs.description.val(venue.about);
-
-                form.setVenueLocation(venue.location);
+                // Organizations will not have locations
+                if(venue.location) {
+                    form.setVenueLocation(venue.location);
+                }
             });
 
         form.expandDescription();
@@ -234,9 +243,11 @@ $('.field')
 $('.date-input').pickadate({format:'mm/dd/yyyy'});
 $('.time-input').pickatime();
 
+// Venues pulled from database
+var venues = [];
 // Setup venues autocomplete
 $.getJSON(apiUrl + 'venues', function( data, status, xhr ) {
-    var venues = $.map(data, function (venue) { 
+    venues = $.map(data, function (venue) { 
         return { value: venue.name + ' ' + venue.street, data: venue };
     });
     form.inputs.venue_name.autocomplete({

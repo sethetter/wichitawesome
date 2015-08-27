@@ -117,7 +117,7 @@ module.exports = (function($, undefined) {
                     components[v2] = (v2 !== 'administrative_area_level_1') ? v1.long_name : v1.short_name;
                 });
             });
-            venue.street = components.street_number + ' ' + components.route;
+            venue.street = components.street_number ? components.street_number + ' ' + components.route : 'Wichita, KS';
             venue.city = components.locality;
             venue.state = components.administrative_area_level_1;
             venue.zip = components.postal_code;
