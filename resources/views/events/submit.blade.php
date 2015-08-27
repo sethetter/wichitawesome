@@ -46,22 +46,22 @@
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label for="s_date" class="caps h5 abs">Start Date</label>
-                <input type="date" class="field col-12 date-input" id="s_date" name="s_date" value="{{ old('s_date') }}" autocomplete="off">
+                <input type="text" class="field col-12 date-input" id="s_date" name="s_date" value="{{ old('s_date') }}" autocomplete="off">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label for="s_time" class="caps h5 abs">Start Time</label>
-                <input type="time" class="field col-12 time-input" id="s_time" name="s_time" value="{{ old('s_time') }}" autocomplete="off">
+                <input type="text" class="field col-12 time-input" id="s_time" name="s_time" value="{{ old('s_time') }}" autocomplete="off">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label for="e_date" class="caps h5 abs">End Date</label>
-                <input type="date" class="field col-12 date-input" id="e_date" name="e_date" value="{{ old('e_date') }}" autocomplete="off">
+                <input type="text" class="field col-12 date-input" id="e_date" name="e_date" value="{{ old('e_date') }}" autocomplete="off">
             </div>
 
             <div class="rel mb2 col col-6 sm-col-3 px1">
                 <label for="e_time" class="caps h5 abs">End Time</label>
-                <input type="time" class="field col-12 time-input" id="e_time" name="e_time" value="{{ old('e_time') }}" autocomplete="off">
+                <input type="text" class="field col-12 time-input" id="e_time" name="e_time" value="{{ old('e_time') }}" autocomplete="off">
             </div>
 
 {{--
