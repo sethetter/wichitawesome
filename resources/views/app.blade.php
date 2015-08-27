@@ -64,6 +64,7 @@
                         @endif
                         <li class="inl-blk"><a class="blx px1 light h6 white caps {{ ( Request::is('events/submit') ) ? 'red' : '' }}" href="{{ url('events/submit') }}">Add Event</a></li>
                         <li class="inl-blk"><a class="blx px1 light h6 white caps {{ ( Request::is('feedback') ) ? 'red' : '' }}" href="{{ url('feedback') }}">Feedback</a></li>
+                        <li class="inl-blk"><a class="blx px1 light h6 white caps" href="http://blog.wichitaweso.me">Blog</a></li>
                     </ul>
                 </nav>
             </div>
