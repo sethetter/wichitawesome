@@ -5,6 +5,7 @@ namespace ICT\Http\Requests;
 use Carbon\Carbon;
 use ICT\Event;
 use ICT\Venue;
+use ICT\Organization;
 use ICT\Http\Requests\Request;
 
 class CollectRequest extends Request
@@ -62,6 +63,11 @@ class CollectRequest extends Request
                 $rules = Venue::$rules;
                 // Make sure the facebook id is unique
                 array_push($rules['facebook'], 'unique:venues');
+            break;
+            case 'organizations':
+                $rules = Organization::$rules;
+                // Make sure the facebook id is unique
+                array_push($rules['facebook'], 'unique:organizations');
             break;
         }
         return $rules;

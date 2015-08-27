@@ -1,12 +1,12 @@
 @extends('app')
 
-@section('title', 'Venues')
+@section('title', 'Organizations')
 @section('description', '')
 
 @section('container', 'container')
 
 @section('content')
-    <form method="post" action="{{ action('VenueController@store') }}">
+    <form method="post" action="{{ action('OrganizationController@store') }}">
         <div class="form-head">
             @include('errors.form')
         </div>
@@ -26,20 +26,6 @@
                 <label for="name" class="caps h5 abs">Name</label>
                 <input type="text" class="blk field col-12" id="name" name="name" value="{{ old('name') }}">
             </div>
-
-            <div class="rel mb2 sm-col sm-col-12 sm-px1">
-                <button type="button" class="btn right bg-light-gray" id="btn_map">Map It</button>
-                <div class="o-hidden">
-                    <label for="street" class="caps h5 abs">Street</label>
-                    <input type="text" class="blk field col-12" id="street" name="street" value="{{ old('street') }}">
-                </div>
-            </div>
-
-            <input type="hidden" id="city" name="city" value="{{ old('city') }}">
-            <input type="hidden" id="state" name="state" value="{{ old('state') }}">
-            <input type="hidden" id="zip" name="zip" value="{{ old('zip') }}">
-            <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude') }}">
-            <input type="hidden" id="latitude" name="latitude" value="{{ old('latitude') }}">
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label for="twitter" class="caps h5 abs">Twitter Handle</label>

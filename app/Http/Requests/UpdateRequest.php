@@ -8,6 +8,7 @@ use ICT\Permission;
 use ICT\Role;
 use ICT\User;
 use ICT\Venue;
+use ICT\Organization;
 use ICT\Http\Requests\Request;
 
 class UpdateRequest extends Request
@@ -66,6 +67,7 @@ class UpdateRequest extends Request
                 $rules = Event::$rules;
                 $id = $this->route('id');
                 $rules['facebook'] = ['numeric','unique:events,facebook,'.$id];
+                $rules['visible'] = ['required','boolean'];
             break;
             case 'permissions':
                 $rules = Permission::$rules;
@@ -77,6 +79,12 @@ class UpdateRequest extends Request
                 $rules = Venue::$rules;
                 $id = $this->route('id');
                 $rules['facebook'] = ['numeric','unique:venues,facebook,'.$id];
+                $rules['visible'] = ['required','boolean'];
+            break;
+            case 'venues':
+                $rules = Organization::$rules;
+                $id = $this->route('id');
+                $rules['facebook'] = ['numeric','unique:organizations,facebook,'.$id];
                 $rules['visible'] = ['required','boolean'];
             break;
         }

@@ -8,6 +8,7 @@ use ICT\Permission;
 use ICT\Role;
 use ICT\User;
 use ICT\Venue;
+use ICT\Organization;
 use ICT\Http\Requests\Request;
 
 class StoreRequest extends Request
@@ -70,6 +71,9 @@ class StoreRequest extends Request
             break;
             case 'venues':
                 $rules = Venue::$rules;
+            break;
+            case 'organizations':
+                $rules = Organization::$rules;
             break;
         }
         return $rules;

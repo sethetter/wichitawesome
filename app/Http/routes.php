@@ -62,6 +62,16 @@ Route::post('venues', ['uses' => 'VenueController@store', 'as' => 'venues.store'
 Route::put('venues/{id}', ['uses' => 'VenueController@update', 'as' => 'venues.update', 'middleware' => 'auth']);
 Route::delete('venues/{id}', ['uses' => 'VenueController@destroy', 'as' => 'venues.destroy', 'middleware' => 'auth']);
 
+Route::get('organizations', ['uses' => 'OrganizationController@index', 'as' => 'organizations.index']);
+Route::get('organizations/submit', ['uses' => 'OrganizationController@submit', 'as' => 'organizations.submit']);
+Route::get('organizations/admin', ['uses' => 'OrganizationController@admin', 'as' => 'organizations.admin', 'middleware' => 'auth']);
+Route::get('organizations/create', ['uses' => 'OrganizationController@create', 'as' => 'organizations.create', 'middleware' => 'auth']);
+Route::get('organizations/{id}', ['uses' => 'OrganizationController@show', 'as' => 'organizations.show']);
+Route::get('organizations/{id}/edit', ['uses' => 'OrganizationController@edit', 'as' => 'organizations.edit', 'middleware' => 'auth']);
+Route::post('organizations', ['uses' => 'OrganizationController@store', 'as' => 'organizations.store']);
+Route::put('organizations/{id}', ['uses' => 'OrganizationController@update', 'as' => 'organizations.update', 'middleware' => 'auth']);
+Route::delete('organizations/{id}', ['uses' => 'OrganizationController@destroy', 'as' => 'organizations.destroy', 'middleware' => 'auth']);
+
 Route::get('users/admin', ['uses' => 'UserController@admin', 'as' => 'users.admin', 'middleware' => 'auth']);
 Route::resource('users', 'UserController', ['except' => ['index'], 'middleware' => 'auth']);
 

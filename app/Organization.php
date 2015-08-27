@@ -9,7 +9,7 @@ use ICT\Traits\Eventable;
 use ICT\Traits\Sluggable;
 use ICT\Traits\Visibility;
 
-class Venue extends Model
+class Organization extends Model
 {
     use SoftDeletes, Eventable, Sluggable, Visibility;
 
@@ -18,14 +18,14 @@ class Venue extends Model
      *
      * @var string
      */
-    protected $table = 'venues';
+    protected $table = 'organizations';
     
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'street', 'city', 'state', 'zip', 'longitude', 'latitude', 'image', 'facebook', 'twitter', 'website', 'email', 'phone', 'visible'];
+    protected $fillable = ['name', 'image', 'facebook', 'twitter', 'website', 'email', 'phone', 'visible'];
     
     /**
      * Set Carbon dates.
@@ -39,13 +39,7 @@ class Venue extends Model
 
     public static $rules = [
         'name' => ['required'],
-        'facebook' => ['numeric','unique:venues,facebook'],
-        'street' => ['required', 'min:3'],
-        'city' => ['required', 'min:3'],
-        'state' => ['required', 'alpha','size:2'],
-        'zip' => ['required', 'min:5'],
-        'latitude' => ['required', 'numeric'],
-        'longitude' => ['required', 'numeric'],
+        'facebook' => ['numeric','unique:organizations,facebook'],
         'description' => ['min:3','max:500'],
         'image' => ['image'],   
         'hashtag' => ['alpha_dash'],
@@ -60,11 +54,6 @@ class Venue extends Model
     public function setFacebookAttribute($value)
     {
         $this->attributes['facebook'] = $value ?: null;
-    }
-
-    public function address()
-    {
-        return $this->street.', '.$this->city.', '.$this->state.', '.$this->zip;
     }
 
     /**
