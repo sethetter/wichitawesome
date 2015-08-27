@@ -36,7 +36,7 @@
             </div>
             <div><svg class="i"><use xlink:href="#icon-facebook"></use></svg> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
             <div class="event-details rel">
-                <svg class="i abs l0"><use xlink:href="#icon-info"></use></svg>
+                <svg class="i abs l0" style="top:.2em;"><use xlink:href="#icon-info"></use></svg>
                 {!! $event->displayDesc() !!}
             </div>
         </div>
