@@ -56,6 +56,17 @@ class Event extends Model
         'hashtag' => ['alpha_dash'],
     ];
 
+    /**
+     * Ensure that Facebook is null when saving.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setFacebookAttribute($value)
+    {
+        $this->attributes['facebook'] = $value ?: null;
+    }
+
     public static function boot()
     {
         parent::boot();

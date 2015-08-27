@@ -50,7 +50,7 @@ class FetchFacebookEvents extends Command
         $this->fetcher = $fetcher;
 
         if(\Schema::hasTable('venues')) {
-            $this->venues = Venue::where('facebook', '!=', 0)->get();
+            $this->venues = Venue::whereNotNull('facebook')->get();
         }
 
     }
