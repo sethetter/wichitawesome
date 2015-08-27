@@ -25,7 +25,9 @@
                 <div class="inl-blk">
                     <svg class="i"><use xlink:href="#icon-clock"></use></svg> {{ $event->displayTime() }}
                 </div>
-                <div><svg class="i"><use xlink:href="#icon-facebook"></use></svg> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
+                @if($event->facebook)
+                    <div><svg class="i"><use xlink:href="#icon-facebook"></use></svg> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
+                @endif
             </div>
         </div>
     @endforeach
