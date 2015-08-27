@@ -244,6 +244,9 @@ $.getJSON(apiUrl + 'venues', function( data, status, xhr ) {
         lookupLimit: 3,
         formatResult: function (suggestion, currentValue) {
             return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
+        },
+        onSelect: function (suggestion) {
+            form.inputs.venue_id.val(suggestion.data.id);
         }
     });
 });
