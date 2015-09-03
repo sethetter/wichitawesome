@@ -113,8 +113,8 @@ class FacebookEventFetcher
             // @TODO: test that this comparison works.
             if($attributes['updated_at'] > $event->updated_at) {
                 $event->update($attributes);
+                echo "Event updated: {$event->name} ({$event->id})\n";
             }
-            echo "Event updated: {$event->name} ({$event->id})\n";
         } else {
             $attributes['visible'] = true;
             $event = Event::create($attributes);
