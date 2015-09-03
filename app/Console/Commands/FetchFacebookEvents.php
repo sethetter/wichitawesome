@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use ICT\Services\FacebookEventFetcher;
 use ICT\Venue;
+use ICT\Organization;
 
 class FetchFacebookEvents extends Command
 {
@@ -36,6 +37,7 @@ class FetchFacebookEvents extends Command
      * @var venues
      */
     protected $venues = [];
+    protected $organizations = [];
 
 
     /**
@@ -49,10 +51,27 @@ class FetchFacebookEvents extends Command
 
         $this->fetcher = $fetcher;
 
-        if(\Schema::hasTable('venues')) {
-            $this->venues = Venue::whereNotNull('facebook')->get();
-        }
+        $this->venues = Venue::whereNotNull('facebook')->get();
+        $this->organizations = Organization::whereNotNull('facebook')->get();
 
+    }
+
+    public function fetchEvents($resources)
+    {
+        $start = new \DateTime('NOW');
+        $this->info("[{$start->format('Y-m-d g:i:s')}] Started fetching new Facebook events.");
+        foreach($resources as $resource)
+        {
+            try {
+                $this->info("Fetching events for {$resource->name} ({$resource->id})...");
+                $this->fetcher->storeEvents($resource);
+            } catch (\Exception $e) {
+                $this->error("Error fetching events for {$resource->name}: {$e->getMessage()} ({$e->getLine()})");
+            }
+            sleep(1);
+        }
+        $finish = new \DateTime('NOW');
+        $this->info("[{$finish->format('Y-m-d g:i:s')}] Finished fetching new Facebook events.");
     }
 
     /**
@@ -62,19 +81,7 @@ class FetchFacebookEvents extends Command
      */
     public function handle()
     {
-        $start = new \DateTime('NOW');
-        $this->info("[{$start->format('Y-m-d g:i:s')}] Started fetching new Facebook events.");
-        foreach($this->venues as $index => $venue)
-        {
-            try {
-                $this->info("Fetching events for {$venue->name} ({$venue->id})...");
-                $this->fetcher->storeEventsForVenue($venue);
-            } catch (\Exception $e) {
-                $this->error("Error fetching events for {$venue->name}: {$e->getMessage()}");
-            }
-            sleep(1);
-        }
-        $finish = new \DateTime('NOW');
-        $this->info("[{$finish->format('Y-m-d g:i:s')}] Finished fetching new Facebook events.");
+        $this->fetchEvents($this->venues);
+        $this->fetchEvents($this->organizations);
     }
 }
