@@ -110,7 +110,6 @@ class FacebookEventFetcher
     {
         $event = Event::where('facebook', '=', $attributes['facebook'])->withHidden()->first();
         if(!is_null($event)) {
-            // @TODO: test that this comparison works.
             if($attributes['updated_at'] > $event->updated_at) {
                 $event->update($attributes);
                 echo "Event updated: {$event->name} ({$event->id})\n";
