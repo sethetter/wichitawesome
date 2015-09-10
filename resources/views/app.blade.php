@@ -57,6 +57,7 @@
                         @if (Auth::user())
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('events/admin*') ) ? 'red' : '' }}" href="{{ url('events/admin') }}">Events</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('venues/admin*') ) ? 'red' : '' }}" href="{{ url('venues/admin') }}">Venues</a></li>
+                            <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('organizations/admin*') ) ? 'red' : '' }}" href="{{ url('organizations/admin') }}">Organizations</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('users/admin*') ) ? 'red' : '' }}" href="{{ url('users/admin') }}">Users</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('roles/admin*') ) ? 'red' : '' }}" href="{{ url('roles/admin') }}">Roles</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('permissions/admin*') ) ? 'red' : '' }}" href="{{ url('permissions/admin') }}">Permissions</a></li>
