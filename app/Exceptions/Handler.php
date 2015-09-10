@@ -4,6 +4,7 @@ namespace ICT\Exceptions;
 
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -39,16 +40,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {   
-        // translates 404's 500's into views found in resources/views/errors
-        if ($this->isHttpException($e)){
+        // 404 page when a model is not found
+        if ($e instanceof ModelNotFoundException) {
+            return response()->view('errors.404', [], 404);
+        }
+
+        if ($this->isHttpException($e)) {
             return $this->renderHttpException($e);
+        } else {
+            // Custom error 500 view on production
+            if (app()->environment() == 'production') {
+                return response()->view('errors.500', [], 500);
+            }
+            return parent::render($request, $e);
         }
-
-        // if debug mode show some details about the exception that was thrown
-        if(config('app.debug')){
-            return (new SymfonyDisplayer(true))->createResponse($e);
-        }
-
-        return \Response::view('errors.exception');
     }
 }
