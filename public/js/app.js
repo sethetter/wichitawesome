@@ -14173,25 +14173,13 @@ var form = {
     displayError: function displayError(message) {
         $('.form-head').empty().append('<div class="p1 mb2 h5 font-heading white bg-dark-red">' + message + '</div>');
     },
-    positionLabels: function positionLabels() {
-        $('.field').each(function () {
-            if (this.value != '') {
-                $(this).parent().addClass('field-active');
-            }
-        });
-    },
-    expandDescription: function expandDescription() {
-
-        // trigger textarea keyup so it expands
-        autosize.update(form.inputs.description[0]);
-    },
     setVenueLocation: function setVenueLocation(venue) {
-        this.inputs.street.val(venue.street);
-        this.inputs.city.val(venue.city);
-        this.inputs.state.val(venue.state);
-        this.inputs.zip.val(venue.zip);
-        this.inputs.longitude.val(venue.longitude);
-        this.inputs.latitude.val(venue.latitude);
+        this.inputs.street.val(venue.street).change();
+        this.inputs.city.val(venue.city).change();
+        this.inputs.state.val(venue.state).change();
+        this.inputs.zip.val(venue.zip).change();
+        this.inputs.longitude.val(venue.longitude).change();
+        this.inputs.latitude.val(venue.latitude).change();
 
         var $canvas = $('#btn_map').parent().find('#map');
         if (!$canvas.length) {
@@ -14202,23 +14190,18 @@ var form = {
         var map = maps.setMap('map', { center: latLng });
         map.destroyMarkers();
         map.setMarker(latLng);
-
-        form.positionLabels();
-        form.expandDescription();
     },
     setEventInfo: function setEventInfo(ictEvent) {
-        form.inputs.facebook.val(ictEvent.id);
-        form.inputs.name.val(ictEvent.name);
-        form.inputs.start_date.val(form.format.dateToStr(ictEvent.start_time));
-        form.inputs.start_time.val(form.format.timeToStr(ictEvent.start_time));
+        form.inputs.facebook.val(ictEvent.id).change();
+        form.inputs.name.val(ictEvent.name).change();
+        form.inputs.start_date.val(form.format.dateToStr(ictEvent.start_time)).change();
+        form.inputs.start_time.val(form.format.timeToStr(ictEvent.start_time)).change();
         if (ictEvent.end_time) {
-            form.inputs.end_date.val(form.format.dateToStr(ictEvent.end_time));
-            form.inputs.end_time.val(form.format.timeToStr(ictEvent.end_time));
+            form.inputs.end_date.val(form.format.dateToStr(ictEvent.end_time)).change();
+            form.inputs.end_time.val(form.format.timeToStr(ictEvent.end_time)).change();
         }
-        form.inputs.description.val(ictEvent.description);
-
-        form.positionLabels();
-        form.expandDescription();
+        form.inputs.description.val(ictEvent.description).change();
+        autosize.update(form.inputs.description[0]);
     },
     getEventByFacebook: function getEventByFacebook(str) {
 
@@ -14247,7 +14230,6 @@ var form = {
             // TODO: implement caching up in here.
             cache.set(str, newEvent);
             form.setEventInfo(newEvent);
-            form.positionLabels();
 
             // Check if there is a Facebook venue
             if (newEvent.place) {
@@ -14261,14 +14243,14 @@ var form = {
                 });
                 // If a match was found, use it
                 if (match) {
-                    form.inputs.venue_name.val(match.street).parent().addClass('field-active');
-                    form.inputs.venue_id.val(match.id);
+                    form.inputs.venue_name.val(match.street).change();
+                    form.inputs.venue_id.val(match.id).change();
                     form.setVenueLocation(match);
                 } else {
                     // If no matches in our database geocode the facebook info
-                    form.inputs.venue_name.val(newEvent.place.name).parent().addClass('field-active');
+                    form.inputs.venue_name.val(newEvent.place.name);
                     // TODO: This might be a problem if place.id does not exists
-                    form.inputs.venue_facebook.val(newEvent.place.id);
+                    form.inputs.venue_facebook.val(newEvent.place.id).change();
                     if (newEvent.place.location) {
                         form.setVenueLocation(newEvent.place.location);
                     } else {
@@ -14299,11 +14281,12 @@ var form = {
         var cachedVenue = cache.get(str);
 
         if (cachedVenue) {
-            form.inputs.name.val(cachedVenue.name);
-            form.inputs.facebook.val(cachedVenue.id);
-            form.inputs.phone.val(cachedVenue.phone);
-            form.inputs.website.val(cachedVenue.website);
-            form.inputs.description.val(cachedVenue.about);
+            form.inputs.name.val(cachedVenue.name).change();
+            form.inputs.facebook.val(cachedVenue.id).change();
+            form.inputs.phone.val(cachedVenue.phone).change();
+            form.inputs.website.val(cachedVenue.website).change();
+            form.inputs.description.val(cachedVenue.about).change();
+            autosize.update(form.inputs.description[0]);
             // Organizations will not have locations
             if (venue.location) {
                 form.setVenueLocation(cachedVenue.location);
@@ -14316,18 +14299,17 @@ var form = {
 
             cache.set(str, venue);
 
-            form.inputs.name.val(venue.name);
-            form.inputs.facebook.val(venue.id);
-            form.inputs.phone.val(venue.phone);
-            form.inputs.website.val(venue.website);
-            form.inputs.description.val(venue.about);
+            form.inputs.name.val(venue.name).change();
+            form.inputs.facebook.val(venue.id).change();
+            form.inputs.phone.val(venue.phone).change();
+            form.inputs.website.val(venue.website).change();
+            form.inputs.description.val(venue.about).change();
+            autosize.update(form.inputs.description[0]);
             // Organizations will not have locations
             if (venue.location) {
                 form.setVenueLocation(venue.location);
             }
         });
-
-        form.expandDescription();
     }
 };
 
@@ -14335,15 +14317,18 @@ module.exports = form;
 
 // Setup labels & textareas
 $(window).load(function () {
-    form.positionLabels();
     autosize(form.inputs.description);
 });
-$('.field').on('change cut paste input keyup', function () {
-    $(this).parent().addClass('field-active');
-}).on('blur', '', function () {
-    if (this.value == '') {
-        $(this).parent().removeClass('field-active');
-    }
+
+function positionLabel($field) {
+    var toggle = $field.val().trim() != '';
+    $field.parent().toggleClass('js-field-active', toggle);
+}
+
+$('.field').each(function () {
+    positionLabel($(this));
+}).on('change cut paste input keyup blur', function () {
+    positionLabel($(this));
 });
 
 // Setup date & time inputs
@@ -14364,24 +14349,22 @@ $.getJSON(apiUrl + 'venues', function (data, status, xhr) {
             return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
         },
         onSelect: function onSelect(suggestion) {
-            form.inputs.venue_id.val(suggestion.data.id);
+            form.inputs.venue_id.val(suggestion.data.id).change();
+            mapButton.addClass('bg-light-gray');
         }
     });
 });
 
 // Setup map inputs
 maps.loadApi();
-
 var mapButton = $('#btn_map');
 var mapInput = mapButton.next().find('input[type="text"]');
-mapInput.on('keyup paste', function () {
-    mapButton.removeClass('bg-light-gray');
-}).on('blur', function () {
-    if (this.value == '') {
+mapInput.on('change keyup paste blur', function () {
+    if (!this.value.trim()) {
         mapButton.addClass('bg-light-gray');
-        return;
+    } else {
+        mapButton.removeClass('bg-light-gray');
     }
-    mapButton.trigger('click');
 });
 mapButton.click(function () {
     var $canvas = $(this).parent().find('#map');
@@ -14407,17 +14390,19 @@ mapButton.click(function () {
 var fbButton = $('#btn_facebook');
 var fbInput = fbButton.next().find('input[type="url"]');
 $(window).load(function () {
+    // Enable use of query string
     setTimeout(function () {
-        if (form.inputs.fb_url.val()) {
+        // Race condition
+        if (form.inputs.fb_url.val().trim()) {
             fbButton.trigger('click');
         }
     }, 20);
 });
-fbInput.on('keyup paste', function () {
-    fbButton.removeClass('bg-light-gray');
-}).on('blur', function () {
-    if (this.value == '') {
+fbInput.on('change keyup paste blur', function () {
+    if (!this.value.trim()) {
         fbButton.addClass('bg-light-gray');
+    } else {
+        fbButton.removeClass('bg-light-gray');
     }
 });
 fbButton.click(function () {

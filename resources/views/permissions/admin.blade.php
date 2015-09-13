@@ -13,9 +13,9 @@
         <table>
             <thead>
                 <tr>
-                    <th>#<span class="sr-only"> ID</span></th>
-                    <th>Name</th>
-                    <th><span class="sr-only">Actions</span></th>
+                    <th scope="col" class="h6">#<span class="sr-only"> ID</span></th>
+                    <th scope="col" class="h6">Name</th>
+                    <th scope="col" class="h6">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $permission->id }}</td>
                         <td><a href="{{ action('PermissionController@edit', $permission->id) }}">{{ $permission->name }}</a></td>
-                        <td>
+                        <td class="nowrap center">
                             <form method="post" action="{{  action('PermissionController@destroy',$permission->id) }}" onsubmit="return confirm('You definitely want to delete this permission?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

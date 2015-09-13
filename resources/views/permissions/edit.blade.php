@@ -16,7 +16,7 @@
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5 abs" for="name">Name</label>
-                <input type="text" class="block col-12 mb1 field" id="name" name="name" value="{{ $permission->name }}">
+                <input type="text" class="block col-12 rel z field" id="name" name="name" value="{{ $permission->name }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">

@@ -16,17 +16,17 @@
 
             <div class="form-group">
                 <label class="caps h5 abs" for="name">Name</label>
-                <input type="text" class="blk col-12 mb1 field" id="name" name="name" value="{{ $user->name }}">
+                <input type="text" class="blk col-12 rel z1 field" id="name" name="name" value="{{ $user->name }}">
             </div>
 
             <div class="form-group">
                 <label class="caps h5 abs" for="email">Email</label>
-                <input type="email" class="blk col-12 mb1 field" id="email" name="email" value="{{ $user->email }}">
+                <input type="email" class="blk col-12 rel z1 field" id="email" name="email" value="{{ $user->email }}">
             </div>
 
             <div class="form-group">
                 <label class="caps h6" for="role_id">Role</label>
-                <select class="blk col-12 mb1 field" id="role_id" name="role_id">
+                <select class="blk col-12 rel z1 field" id="role_id" name="role_id">
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}" {{ ($user->role_id == $role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
                     @endforeach
@@ -35,12 +35,12 @@
 
             <div class="form-group">
                 <label class="caps h5 abs" for="password">Password</label>
-                <input type="password" class="blk col-12 mb1 field" id="password" name="password">
+                <input type="password" class="blk col-12 rel z1 field" id="password" name="password">
             </div>
 
             <div class="form-group">
                 <label class="caps h5 abs" for="password_confirmation">Confirm Password</label>
-                <input type="password" class="blk col-12 mb1 field" name="password_confirmation">
+                <input type="password" class="blk col-12 rel z1 field" name="password_confirmation">
             </div>
 
             <div class="form-group">

@@ -22,7 +22,7 @@ input[type=url],
 input[type=week] {
     box-sizing: border-box;
     height: $form-field-height;
-    padding: $form-field-padding-y $form-field-padding-x;
+    padding: $form-field-padding-y $form-field-padding-x 0;
     border-radius: $border-radius;
     vertical-align: middle;
     -webkit-appearance: none;
@@ -30,15 +30,15 @@ input[type=week] {
 
 select {
     box-sizing: border-box;
-    padding: $form-field-padding-y $form-field-padding-x;
+    padding: $form-field-padding-y $form-field-padding-x 0;
     border-radius: $border-radius;
     -moz-appearance: none;
     -webkit-appearance: none;
-    background: $white url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat;
+    background: transparent url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat;
 }
 
 select:not([multiple]) {
-    height: $form-field-height;
+    height: $form-field-height + .5;
     vertical-align: middle;
 }
 
@@ -48,6 +48,7 @@ textarea {
     padding: $form-field-padding-y $form-field-padding-x;
     border-radius: $border-radius;
     resize: vertical;
+    line-height: 1.4;
 }
 
 fieldset {

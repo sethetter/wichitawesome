@@ -16,7 +16,7 @@
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">
                 <label class="caps h5" for="name">Name</label>
-                <input type="text" class="blk col-12 mb1 field" id="name" name="name" value="{{ $role->name }}">
+                <input type="text" class="blk col-12 rel z1 field" id="name" name="name" value="{{ $role->name }}">
             </div>
 
             <div class="rel mb2 sm-col sm-col-12 sm-px1">

@@ -13,11 +13,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>#<span class="sr-only"> ID</span></th>
-                    <th>Name</th>
-                    <th>Users</th>
-                    <th>Permissions</th>
-                    <th><span class="sr-only">Actions</span></th>
+                    <th scope="col" class="h6">#<span class="sr-only"> ID</span></th>
+                    <th scope="col" class="h6">Name</th>
+                    <th scope="col" class="h6">Users</th>
+                    <th scope="col" class="h6">Permissions</th>
+                    <th scope="col" class="h6">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                         <td><a href="{{ action('RoleController@edit', $role->id) }}">{{ $role->name }}</a></td>
                         <td>{{ count($role->users) }}</td>
                         <td>{{ count($role->permissions) }}</td>
-                        <td>
+                        <td class="nowrap center">
                             <form method="post" action="{{  action('RoleController@destroy',$role->id) }}" onsubmit="return confirm('You definitely want to delete this role?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

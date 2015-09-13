@@ -525,12 +525,12 @@ button:before,
 
 label {
   font-family: "Montserrat", sans-serif;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem 0;
   transition: all 0.2s; }
 
 .field {
   color: #162536;
-  background-color: #fff;
+  background-color: transparent;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); }
 
@@ -558,11 +558,21 @@ label {
 .field.error {
   border-color: #4c121d; }
 
-.field-active label {
+.js-field-active label {
+  color: #bbc3cf;
   font-size: 0.75rem;
-  top: -.75em;
+  top: -.5em;
   padding-top: 0;
   padding-bottom: 0; }
+
+select.field {
+  margin-top: -1em; }
+
+.field:focus {
+  background-color: rgba(255, 255, 255, 0.5); }
+
+.js-field-active .field:focus {
+  background-color: transparent; }
 
 table th,
 table td {
@@ -738,21 +748,21 @@ input[type=url],
 input[type=week] {
   box-sizing: border-box;
   height: 2.25rem;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem 0;
   border-radius: 0px;
   vertical-align: middle;
   -webkit-appearance: none; }
 
 select {
   box-sizing: border-box;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem 0.5rem 0;
   border-radius: 0px;
   -moz-appearance: none;
   -webkit-appearance: none;
-  background: #fff url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat; }
+  background: transparent url(../img/form/select@2x.png) 100% 50%/21px 10px no-repeat; }
 
 select:not([multiple]) {
-  height: 2.25rem;
+  height: 2.75rem;
   vertical-align: middle; }
 
 textarea {
@@ -760,7 +770,8 @@ textarea {
   height: 2.25rem;
   padding: 0.5rem 0.5rem;
   border-radius: 0px;
-  resize: vertical; }
+  resize: vertical;
+  line-height: 1.4; }
 
 fieldset {
   padding: 0;
@@ -1038,11 +1049,22 @@ fieldset legend {
   display: none !important; }
 
 .sr-only {
-  position: absolute !important;
-  height: 1px;
+  position: absolute;
   width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px); }
+  clip: rect(0, 0, 0, 0);
+  border: 0; }
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto; }
 
 table {
   border-collapse: separate;
@@ -2284,6 +2306,6 @@ html, body {
 
 .time-input:read-only:not(select),
 .date-input:read-only:not(select) {
-  background: #fff; }
+  background: transparent; }
 
 /*# sourceMappingURL=app.css.map */

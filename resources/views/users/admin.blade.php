@@ -13,12 +13,12 @@
         <table>
             <thead>
                 <tr>
-                    <th>#<span class="sr-only"> ID</span></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Date</th>
-                    <th><span class="sr-only">Actions</span></th>
+                    <th scope="col" class="h6">#<span class="sr-only"> ID</span></th>
+                    <th scope="col" class="h6">Name</th>
+                    <th scope="col" class="h6">Email</th>
+                    <th scope="col" class="h6">Role</th>
+                    <th scope="col" class="h6">Date</th>
+                    <th scope="col" class="h6">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role->name }}</td>
                         <td>{{ $user->created_at->format('m/d/Y') }}</td>
-                        <td>
+                        <td class="nowrap center">
                             <form method="post" action="{{  action('UserController@destroy',$user->id) }}" onsubmit="return confirm('You definitely want to delete this user?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

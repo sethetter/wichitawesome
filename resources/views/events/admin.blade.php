@@ -13,16 +13,16 @@
         <table>
             <thead>
                 <tr>
-                    <th class="h6">#<span class="sr-only"> ID</span></th>
-                    <th class="h6">Name</th>
-                    <th class="h6">Start Time</th>
-                    <th class="h6">End Time</th>
-                    <th class="h6">Venue</th>
-                    <th class="h6">Facebook</th>
-                    <th class="h6">Hashtag</th>
-                    <th class="h6">User</th>
-                    <th class="h6">Visibiliy</th>
-                    <th class="h6"><span class="sr-only">Actions</span></th>
+                    <th scope="col" class="h6">#<span class="sr-only"> ID</span></th>
+                    <th scope="col" class="h6">Name</th>
+                    <th scope="col" class="h6">Start Time</th>
+                    <th scope="col" class="h6">End Time</th>
+                    <th scope="col" class="h6">Venue</th>
+                    <th scope="col" class="h6">Facebook</th>
+                    <th scope="col" class="h6">Hashtag</th>
+                    <th scope="col" class="h6">User</th>
+                    <th scope="col" class="h6">Visibiliy</th>
+                    <th scope="col" class="h6">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@
                                 <svg class="red i"><use xlink:href="#icon-visibility-off"></use></svg>
                             @endif
                         </td>
-                        <td class="nowrap">
+                        <td class="nowrap center">
                             <form class="inl-blk" method="post" action="{{ action('EventController@destroy',$event->id) }}" onsubmit="return confirm('You definitely want to delete this event?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

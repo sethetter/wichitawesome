@@ -1,13 +1,13 @@
 label {
     font-family: $heading-font-family;
-    padding: $form-field-padding-y $form-field-padding-x;
+    padding: $form-field-padding-y $form-field-padding-x 0;
     transition: all .2s;
 }
 .field {
     color: $black;
-    background-color: #fff;
+    background-color: transparent;
     border: 0;
-    border-bottom: $border-width solid $border-color; 
+    border-bottom: $border-width solid $border-color;
 }
 
 .field:focus {
@@ -41,9 +41,19 @@ label {
     border-color: $dark-red;
 }
 
-.field-active label {
+.js-field-active label {
+    color: #bbc3cf;
     font-size: $h6;
-    top: -.75em;
+    top: -.5em;
     padding-top: 0;
     padding-bottom: 0;
+}
+select.field {
+    margin-top: -1em;
+}
+.field:focus {
+    background-color: rgba(255,255,255,.5);
+}
+.js-field-active .field:focus {
+    background-color: transparent;
 }
