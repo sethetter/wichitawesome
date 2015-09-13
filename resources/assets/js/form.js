@@ -137,7 +137,7 @@ var form = {
                         form.setVenueLocation(match);
                     } else {
                         // If no matches in our database geocode the facebook info
-                        form.inputs.venue_name.val(newEvent.place.name);
+                        form.inputs.venue_name.val(newEvent.place.name).change();
                         // TODO: This might be a problem if place.id does not exists
                         form.inputs.venue_facebook.val(newEvent.place.id).change();
                         if(newEvent.place.location) {
