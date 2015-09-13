@@ -18,11 +18,11 @@
                     <th scope="col" class="h6">Start Time</th>
                     <th scope="col" class="h6">End Time</th>
                     <th scope="col" class="h6">Venue</th>
-                    <th scope="col" class="h6">Facebook</th>
+                    <th scope="col" class="h6 center">Facebook</th>
                     <th scope="col" class="h6">Hashtag</th>
                     <th scope="col" class="h6">User</th>
-                    <th scope="col" class="h6">Visibiliy</th>
-                    <th scope="col" class="h6">Actions</th>
+                    <th scope="col" class="h6 center">Visibiliy</th>
+                    <th scope="col" class="h6 center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@
                                 <svg class="red i"><use xlink:href="#icon-visibility-off"></use></svg>
                             @endif
                         </td>
-                        <td class="nowrap center">
+                        <td class="nowrap center tbl-cell">
                             <form class="inl-blk" method="post" action="{{ action('EventController@destroy',$event->id) }}" onsubmit="return confirm('You definitely want to delete this event?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

@@ -29,7 +29,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role->name }}</td>
                         <td>{{ $user->created_at->format('m/d/Y') }}</td>
-                        <td class="nowrap center">
+                        <td class="nowrap center tbl-cell">
                             <form method="post" action="{{  action('UserController@destroy',$user->id) }}" onsubmit="return confirm('You definitely want to delete this user?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

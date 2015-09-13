@@ -15,13 +15,13 @@
                 <tr>
                     <th scope="col" class="h6">#<span class="sr-only"> ID</span></th>
                     <th scope="col" class="h6">Name</th>
-                    <th scope="col" class="h6">Facebook</th>
+                    <th scope="col" class="h6 center">Facebook</th>
                     <th scope="col" class="h6">Twitter</th>
                     <th scope="col" class="h6">Website</th>
-                    <th scope="col" class="h6">Email</th>
-                    <th scope="col" class="h6">Phone</th>
-                    <th scope="col" class="h6">Visibiliy</th>
-                    <th scope="col" class="h6">Actions</th>
+                    <th scope="col" class="h6 center">Email</th>
+                    <th scope="col" class="h6 center">Phone</th>
+                    <th scope="col" class="h6 center">Visibiliy</th>
+                    <th scope="col" class="h6 center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                     <tr>
                         <td>{{ $organization->id }}</td>
                         <td><a href="{{ action('OrganizationController@edit', $organization->id) }}">{{ $organization->name }}</a></td>
-                        <td class="center">
+                        <td class="center tbl-cell">
                             @if($organization->facebook)
                                 <a target="_blank" href="https://facebook.com/{{ $organization->facebook }}"><svg class="i"><use xlink:href="#icon-launch"></use></svg></a>
                             @endif
@@ -44,24 +44,24 @@
                                 <a target="_blank" href="{{ $organization->website }}">{{ $organization->website }}</a>
                             @endif
                         </td>
-                        <td class="center">
+                        <td class="center tbl-cell">
                             @if($organization->email)
                                 <a target="_blank" href="mailto:{{ $organization->email }}"><svg class="i"><use xlink:href="#icon-mail"></use></svg></a>
                             @endif
                         </td>
-                        <td class="nowrap">
+                        <td class="center tbl-cell">
                             @if($organization->phone)
-                                <a target="_blank" href="tel:{{ $organization->phone }}">{{ $organization->phone }}</a>
+                                <a target="_blank" href="tel:{{ $organization->phone }}"><svg class="i"><use xlink:href="#icon-smartphone"></use></svg></a>
                             @endif
                         </td>
-                        <td class="center">
+                        <td class="center tbl-cell">
                             @if($organization->visible)
                                 <a target="_blank" href="{{ action('OrganizationController@show',$organization->id) }}"><svg class="green i"><use xlink:href="#icon-visibility"></use></svg></a>
                             @else
                                 <svg class="red i"><use xlink:href="#icon-visibility-off"></use></svg>
                             @endif
                         </td>
-                        <td class="nowrap center">
+                        <td class="nowrap center tbl-cell">
                             <form class="inl-blk" method="post" action="{{  action('OrganizationController@destroy',$organization->id) }}" onsubmit="return confirm('You definitely want to delete this organization?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

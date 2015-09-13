@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $permission->id }}</td>
                         <td><a href="{{ action('PermissionController@edit', $permission->id) }}">{{ $permission->name }}</a></td>
-                        <td class="nowrap center">
+                        <td class="nowrap center tbl-cell">
                             <form method="post" action="{{  action('PermissionController@destroy',$permission->id) }}" onsubmit="return confirm('You definitely want to delete this permission?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />

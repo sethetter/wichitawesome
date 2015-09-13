@@ -27,7 +27,7 @@
                         <td><a href="{{ action('RoleController@edit', $role->id) }}">{{ $role->name }}</a></td>
                         <td>{{ count($role->users) }}</td>
                         <td>{{ count($role->permissions) }}</td>
-                        <td class="nowrap center">
+                        <td class="nowrap center tbl-cell">
                             <form method="post" action="{{  action('RoleController@destroy',$role->id) }}" onsubmit="return confirm('You definitely want to delete this role?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="delete" />
