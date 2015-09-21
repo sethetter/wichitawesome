@@ -1,5 +1,7 @@
 <?php
 
+use ICT\Event;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,6 +37,16 @@ Route::post('feedback', 'FeedbackController@send');
 
 // @TODO: Enable this when the homepage is updated
 //Route::get('events', ['uses' => 'EventController@index', 'as' => 'events.index']);
+Route::get('events/tag', function() {
+    $events = Event::with('venue')->upcoming()->get();
+    foreach($events as $event) {
+        $tags = $event->venue->tags->lists('id')->toArray();
+        $event->tags()->attach($tags);
+        echo "{$event->name} tagged.<br>";
+    }
+    return 'All events tagged.';
+});
+
 Route::get('events/submit', ['uses' => 'EventController@submit', 'as' => 'events.submit']);
 Route::get('events/admin', ['uses' => 'EventController@admin', 'as' => 'events.admin', 'middleware' => 'auth']);
 Route::get('events/create', ['uses' => 'EventController@create', 'as' => 'events.create', 'middleware' => 'auth']);
@@ -46,11 +58,14 @@ Route::post('events', ['uses' => 'EventController@store', 'as' => 'events.store'
 Route::put('events/{id}', ['uses' => 'EventController@update', 'as' => 'events.update', 'middleware' => 'auth']);
 Route::delete('events/{id}', ['uses' => 'EventController@destroy', 'as' => 'events.destroy', 'middleware' => 'auth']);
 
+Route::get('tags/admin', ['uses' => 'TagController@admin', 'as' => 'tags.admin', 'middleware' => 'auth']);
+Route::resource('tags', 'TagController', ['except' => ['index','show'], 'middleware' => 'auth']);
+
 Route::get('permissions/admin', ['uses' => 'PermissionController@admin', 'as' => 'permissions.admin', 'middleware' => 'auth']);
-Route::resource('permissions', 'PermissionController', ['except' => ['index'], 'middleware' => 'auth']);
+Route::resource('permissions', 'PermissionController', ['except' => ['index','show'], 'middleware' => 'auth']);
 
 Route::get('roles/admin', ['uses' => 'RoleController@admin', 'as' => 'roles.admin', 'middleware' => 'auth']);
-Route::resource('roles', 'RoleController', ['except' => ['index'], 'middleware' => 'auth']);
+Route::resource('roles', 'RoleController', ['except' => ['index','show'], 'middleware' => 'auth']);
 
 Route::get('venues', ['uses' => 'VenueController@index', 'as' => 'venues.index']);
 Route::get('venues/submit', ['uses' => 'VenueController@submit', 'as' => 'venues.submit']);

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use ICT\Event;
 use ICT\Permission;
 use ICT\Role;
+use ICT\Tag;
 use ICT\User;
 use ICT\Venue;
 use ICT\Organization;
@@ -75,13 +76,16 @@ class UpdateRequest extends Request
             case 'roles':
                 $rules = Role::$rules;
             break;
+            case 'tags':
+                $rules = Tag::$rules;
+            break;
             case 'venues':
                 $rules = Venue::$rules;
                 $id = $this->route('id');
                 $rules['facebook'] = ['numeric','unique:venues,facebook,'.$id];
                 $rules['visible'] = ['required','boolean'];
             break;
-            case 'venues':
+            case 'organization':
                 $rules = Organization::$rules;
                 $id = $this->route('id');
                 $rules['facebook'] = ['numeric','unique:organizations,facebook,'.$id];

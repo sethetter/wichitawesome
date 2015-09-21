@@ -28,6 +28,13 @@
                 @if($event->facebook)
                     <div><svg class="i"><use xlink:href="#icon-facebook"></use></svg> <a target="_blank" href="https://facebook.com/events/{{ $event->facebook }}">Facebook Event</a></div>
                 @endif
+                @if($event->tags)
+                    <div class="mt1">
+                        @foreach($event->tags as $tag)
+                            <label for="tag_{{ $tag->id }}" class="inl-blk tag b {{ in_array($tag->slug, explode(',', Request::get('tags'))) ? 'b-light-blue light-blue' : '' }}">{{ $tag->name }}</label>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </div>
     @endforeach

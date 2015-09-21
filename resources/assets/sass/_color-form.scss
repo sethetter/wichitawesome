@@ -41,7 +41,7 @@ label {
     border-color: $dark-red;
 }
 
-.js-field-active label {
+.js-field-active label.abs {
     color: #bbc3cf;
     font-size: $h6;
     top: -.5em;

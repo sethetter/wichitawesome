@@ -12,6 +12,7 @@ use ICT\Http\Requests\StoreRequest;
 use ICT\Http\Requests\UpdateRequest;
 use ICT\Http\Requests\DestroyRequest;
 use ICT\Http\Controllers\Controller;
+use ICT\Tag;
 use ICT\Venue;
 
 class EventController extends Controller
@@ -32,9 +33,22 @@ class EventController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['events'] = Event::with('venue')->upcoming()->simplePaginate(10);
+        $data['tags'] = Tag::whereHas('events', function($query) {
+            $query->upcoming();
+        })->orderBy('name')->get();
+        if( ! $request->tags ) {
+            $data['events'] = Event::with('venue', 'tags')->upcoming()->simplePaginate(10);
+        } else {
+            $events = Event::with('venue');
+            foreach(explode(',', $request->tags) as $tag) {
+                $events->whereHas('tags', function($query) use ($request, $tag) {
+                    $query->where('slug', $tag);
+                });
+            }
+            $data['events'] = $events->upcoming()->simplePaginate(10)->appends(['tags' => $request->tags]);
+        }
         return view('events.index', $data);
     }
 
@@ -45,12 +59,22 @@ class EventController extends Controller
      */
     public function getEvents()
     {
-        return response()->json(Event::with('venue')->upcoming()->simplePaginate(10));
+        return response()->json(Event::with('venue', 'tags')->upcoming()->simplePaginate(10));
     }
 
-    public function viewEvents()
+    public function viewEvents(Request $request)
     {
-        $data['events'] = Event::with('venue')->upcoming()->simplePaginate(10);
+        if( ! $request->tags ) {
+            $data['events'] = Event::with('venue', 'tags')->upcoming()->simplePaginate(10);
+        } else {
+            $events = Event::with('venue');
+            foreach(explode(',', $request->tags) as $tag) {
+                $events->whereHas('tags', function($query) use ($request, $tag) {
+                    $query->where('slug', $tag);
+                });
+            }
+            $data['events'] = $events->upcoming()->simplePaginate(10)->appends(['tags' => $request->tags]);
+        }
         if(count($data['events']))
         {
             return response()->view('events.partials.list', $data);
@@ -65,8 +89,8 @@ class EventController extends Controller
      */
     public function submit(Request $request)
     {
-        $data['venues'] = Venue::all();
         $data['fb_url'] = $request->fb_url;
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('events.submit', $data);
     }
 
@@ -78,7 +102,7 @@ class EventController extends Controller
     public function collect(CollectRequest $request)
     {
         $data = $request->all();
-        if($request->user() && $request->user()->hasPermission('events.store')) {
+        if($request->user() && $request->user()->hasPermission('events.admin')) {
             $data['visible'] = true;
         }
 
@@ -90,6 +114,7 @@ class EventController extends Controller
         }
 
         $event = Event::create($data);
+        $event->tags()->attach($request->tags);
 
         if($event)
         {
@@ -118,7 +143,8 @@ class EventController extends Controller
      */
     public function create(AdminRequest $request)
     {
-        $data['venues'] = Venue::all();
+        $data['venues'] = Venue::orderBy('name')->get();
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('events.create', $data);
     }
 
@@ -131,7 +157,7 @@ class EventController extends Controller
     {
         $data = $request->all();
         $data['visible'] = true;
-        Event::create($data);
+        Event::create($data)->tags()->attach($request->tags);
         return redirect('events/admin')->with('message', 'Event created!');
     }
 
@@ -153,7 +179,7 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $data['event'] = Event::with('venue')->findOrFail($id); 
+        $data['event'] = Event::with('venue', 'tags')->findOrFail($id); 
         return view('events.show', $data);
     }
 
@@ -178,8 +204,9 @@ class EventController extends Controller
      */
     public function edit(AdminRequest $request, $id)
     {
-        $data['event'] = Event::withHidden()->findOrFail($id);
-        $data['venues'] = Venue::all();
+        $data['event'] = Event::with('venue', 'tags')->withHidden()->findOrFail($id);
+        $data['venues'] = Venue::orderBy('name')->get();
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('events.edit', $data);
     }
 
@@ -191,7 +218,9 @@ class EventController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        Event::withHidden()->findOrFail($id)->update($request->all());
+        $event = Event::withHidden()->findOrFail($id);
+        $event->update($request->all());
+        $event->tags()->sync($request->input('tags', []));
         return redirect('events/admin')->with('message', 'Event updated.');
     }
 
@@ -204,6 +233,9 @@ class EventController extends Controller
     public function destroy(DestroyRequest $request, $id)
     {
         $event = Event::withHidden()->findOrFail($id);
+        if(count($event->tags)) {
+            $event->tags()->detach($event->tags->lists('id')->toArray());
+        }
         $event->delete();
         return redirect('events/admin')->with('message', 'Event destroyed.');
     }

@@ -14067,9 +14067,64 @@ var scrollawesome = require('./scrollawesome');
 var scrollFrame = require('scroll-frame');
 
 if ($('#event_list').length > 0) {
-    scrollawesome();
+    scrollawesome.init();
     scrollFrame('.event-name');
 }
+
+function updateQueryString(key, value, url) {
+    if (!url) url = window.location.href;
+    var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+        hash;
+
+    if (re.test(url)) {
+        if (typeof value !== 'undefined' && value !== null) {
+            return url.replace(re, '$1' + key + "=" + value + '$2$3');
+        } else {
+            hash = url.split('#');
+            url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null) url += '#' + hash[1];
+            return url;
+        }
+    } else {
+        if (typeof value !== 'undefined' && value !== null) {
+            var separator = url.indexOf('?') !== -1 ? '&' : '?';
+            hash = url.split('#');
+            url = hash[0] + separator + key + '=' + value;
+            if (typeof hash[1] !== 'undefined' && hash[1] !== null) url += '#' + hash[1];
+            return url;
+        } else {
+            return url;
+        }
+    }
+}
+
+var $tags = $('[data-toggle="tag"]');
+$tags.change(function () {
+    var values = [];
+    $.each($tags.serializeArray(), function (i, field) {
+        values.push(field.value);
+    });
+    window.location = values.length ? updateQueryString('tags', values.join(',')) : updateQueryString('tags');
+});
+
+$('.js-filter-btn').click(function () {
+    var $this = $(this);
+    var $container = $('.js-filter-container');
+    if (!$container.hasClass('js-open')) {
+        $container.slideDown(100, function () {
+            $container.addClass('js-open');
+            scrollawesome.refresh();
+        });
+        $this.text('Close');
+    } else {
+        $container.slideUp(100, function () {
+            $container.removeClass('js-open');
+            scrollawesome.refresh();
+        });
+        $this.text('Filter');
+    }
+    return false;
+});
 
 require('./form');
 
@@ -14324,7 +14379,6 @@ function positionLabel($field) {
     var toggle = $field.val().trim() != '';
     $field.parent().toggleClass('js-field-active', toggle);
 }
-
 $('.field').each(function () {
     positionLabel($(this));
 }).on('change cut paste input keyup blur', function () {
@@ -14335,25 +14389,27 @@ $('.field').each(function () {
 $('.date-input').pickadate({ format: 'mm/dd/yyyy' });
 $('.time-input').pickatime();
 
-// Venues pulled from database
-var venues = [];
-// Setup venues autocomplete
-$.getJSON(apiUrl + 'venues', function (data, status, xhr) {
-    venues = $.map(data, function (venue) {
-        return { value: venue.name + ' ' + venue.street, data: venue };
+if (form.inputs.venue_name.length) {
+    // Venues pulled from database
+    var venues = [];
+    // Setup venues autocomplete
+    $.getJSON(apiUrl + 'venues', function (data, status, xhr) {
+        venues = $.map(data, function (venue) {
+            return { value: venue.name + ' ' + venue.street, data: venue };
+        });
+        form.inputs.venue_name.autocomplete({
+            lookup: venues,
+            lookupLimit: 3,
+            formatResult: function formatResult(suggestion, currentValue) {
+                return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
+            },
+            onSelect: function onSelect(suggestion) {
+                form.inputs.venue_id.val(suggestion.data.id).change();
+                mapButton.addClass('bg-light-gray');
+            }
+        });
     });
-    form.inputs.venue_name.autocomplete({
-        lookup: venues,
-        lookupLimit: 3,
-        formatResult: function formatResult(suggestion, currentValue) {
-            return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
-        },
-        onSelect: function onSelect(suggestion) {
-            form.inputs.venue_id.val(suggestion.data.id).change();
-            mapButton.addClass('bg-light-gray');
-        }
-    });
-});
+}
 
 // Setup map inputs
 maps.loadApi();
@@ -14555,17 +14611,11 @@ module.exports = (function ($, undefined) {
 })(jQuery);
 
 },{"jquery":3}],14:[function(require,module,exports){
-"use strict";
+'use strict';
 
-module.exports = function (undefined) {
+module.exports = (function (undefined) {
     function documentHeight() {
         return Math.max(document.documentElement.clientHeight, document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight);
-    }
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     var scroll = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame ||
     // IE Fallback, you can even fallback to onscroll
@@ -14581,8 +14631,21 @@ module.exports = function (undefined) {
     var eventList = document.getElementById('event_list');
     var pagination = document.getElementById('pagination_next');
     var paginationStart;
-    var currentPage = getParameterByName('page') || 1;
     var loadingPage = false;
+
+    if (pagination) {
+        var nextPage = 2; // Assume we are on page 1
+        var queryStr = pagination.href.split('?')[1];
+        var queryVars = queryStr.split('&');
+        var i = 0;
+        for (var i; i < queryVars.length; i++) {
+            var pair = queryVars[i].split('=');
+            if (decodeURIComponent(pair[0]) == 'page') {
+                nextPage = decodeURIComponent(pair[1]); // If page is set use that instead
+                queryVars.splice(i, 1);
+            }
+        }
+    }
 
     var loop = function loop() {
         var scrollY = window.pageYOffset;
@@ -14612,10 +14675,9 @@ module.exports = function (undefined) {
                 matrix[i].el.style['top'] = '';
             }
 
-            if (scrollY >= paginationStart && !loadingPage) {
+            if (pagination && scrollY >= paginationStart && !loadingPage) {
                 loadingPage = true;
-                currentPage++;
-                var url = apiUrl + 'view/events/?page=' + currentPage;
+                var url = apiUrl + 'view/events/?' + queryVars.join('&') + '&page=' + nextPage;
                 var req = new XMLHttpRequest();
                 req.open('GET', url, true);
                 req.onreadystatechange = function () {
@@ -14626,13 +14688,13 @@ module.exports = function (undefined) {
                     if (req.readyState === 4) {
                         eventList.insertAdjacentHTML('beforeend', req.responseText);
                         pagination.style.display = 'none';
+                        nextPage++;
                         refresh();
                     }
                 };
                 req.send(null);
             }
         };
-
         scroll(loop);
     };
 
@@ -14666,8 +14728,15 @@ module.exports = function (undefined) {
 
     window.onresize = refresh;
 
-    refresh();
-    loop();
-};
+    var init = function init() {
+        refresh();
+        loop();
+    };
+
+    return {
+        init: init,
+        refresh: refresh
+    };
+})();
 
 },{}]},{},[9]);

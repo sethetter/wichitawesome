@@ -35,15 +35,18 @@
 
 /* Border Color */
 
-.border-black  { border-color: $black }
-.border-gray   { border-color: $gray }
-.border-silver { border-color: $silver }
-.border-white  { border-color: $white }
+.b-black  { border-color: $black }
+.b-gray   { border-color: $gray }
+.b-silver { border-color: $silver }
+.b-white  { border-color: $white }
 
-.border-darken-1 { border-color: $darken-1 }
-.border-darken-2 { border-color: $darken-2 }
-.border-darken-3 { border-color: $darken-3 }
-.border-darken-4 { border-color: $darken-4 }
+.b-red  { border-color: $red }
+.b-light-blue  { border-color: $light-blue }
+
+.b-darken-1 { border-color: $darken-1 }
+.b-darken-2 { border-color: $darken-2 }
+.b-darken-3 { border-color: $darken-3 }
+.b-darken-4 { border-color: $darken-4 }
 
 /* Opacity */
 

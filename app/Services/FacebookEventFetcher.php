@@ -71,6 +71,7 @@ class FacebookEventFetcher
                 'facebook' => $event->id,
                 'venue_id' => $venue->id,
                 'updated_at' => $this->castToDateTime($event->updated_time),
+                'tags' => $venue->tags->lists('id')->toArray()
             ];
 
             $this->updateOrCreate($eventData);
@@ -118,6 +119,7 @@ class FacebookEventFetcher
             $attributes['visible'] = true;
             $event = Event::create($attributes);
             echo "Event created: {$event->name} ({$event->id})\n";
+            $event->tags()->attach($attributes['tags']);
         }
     }
 

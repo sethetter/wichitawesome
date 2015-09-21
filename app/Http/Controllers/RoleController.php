@@ -54,17 +54,6 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('roles.show');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

@@ -66,4 +66,15 @@ class Organization extends Model
     {
         return $this->belongsTo('ICT\User');
     }
+
+    /**
+     * Tags relationship.
+     * 
+     * @access public
+     * @return void
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('ICT\Tag');
+    }
 }

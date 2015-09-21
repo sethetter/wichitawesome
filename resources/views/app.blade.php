@@ -37,13 +37,13 @@
 </head>
 <body>
     @include('icons')
-    @if(Session::has('message'))
-        <div class="p2 center bg-green white font-heading">{!! Session::get('message') !!}</div>
-    @else
-        <div class="p1 center bg-dark-red light-blue font-heading h6"><small><strong>We're in beta!</strong> <a class="light-blue underline" href="{{ url('feedback') }}">Let us know if you find anything weird.</a></small></div>
-    @endif
     <div class="main">
         <div class="main-content">
+            @if(Session::has('message'))
+                <div class="p2 center bg-green white font-heading">{!! Session::get('message') !!}</div>
+            @else
+                <div class="p1 center bg-dark-red light-blue font-heading h6"><small><strong>We're in beta!</strong> <a class="light-blue underline" href="{{ url('feedback') }}">Let us know if you find anything weird.</a></small></div>
+            @endif
             <div class="head bg-light-blue clearfix center rel z1">
                 <div class="abs b0 col col-12 center" style="font-size:0;">
                     <a class="logo inl-blk" href="{{ url('/') }}">
@@ -58,6 +58,7 @@
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('events/admin*') ) ? 'red' : '' }}" href="{{ url('events/admin') }}">Events</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('venues/admin*') ) ? 'red' : '' }}" href="{{ url('venues/admin') }}">Venues</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('organizations/admin*') ) ? 'red' : '' }}" href="{{ url('organizations/admin') }}">Organizations</a></li>
+                            <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('tags/admin*') ) ? 'red' : '' }}" href="{{ url('tags/admin') }}">Tags</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('users/admin*') ) ? 'red' : '' }}" href="{{ url('users/admin') }}">Users</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('roles/admin*') ) ? 'red' : '' }}" href="{{ url('roles/admin') }}">Roles</a></li>
                             <li class="inl-blk"><a class="blk px1 light h6 white caps {{ ( Request::is('permissions/admin*') ) ? 'red' : '' }}" href="{{ url('permissions/admin') }}">Permissions</a></li>
@@ -69,9 +70,7 @@
                     </ul>
                 </nav>
             </div>
-            <div class="px2 py4 @yield('container') clearfix">
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </div>
     <div class="foot p2 bg-light-blue dark-red center font-heading h5">
