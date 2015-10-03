@@ -37,15 +37,15 @@ Route::post('feedback', 'FeedbackController@send');
 
 // @TODO: Enable this when the homepage is updated
 //Route::get('events', ['uses' => 'EventController@index', 'as' => 'events.index']);
-Route::get('events/tag', function() {
-    $events = Event::with('venue')->upcoming()->get();
-    foreach($events as $event) {
-        $tags = $event->venue->tags->lists('id')->toArray();
-        $event->tags()->attach($tags);
-        echo "{$event->name} tagged.<br>";
-    }
-    return 'All events tagged.';
-});
+// Route::get('events/tag', function() {
+//     $events = Event::with('venue')->upcoming()->get();
+//     foreach($events as $event) {
+//         $tags = $event->venue->tags->lists('id')->toArray();
+//         $event->tags()->attach($tags);
+//         echo "{$event->name} tagged.<br>";
+//     }
+//     return 'All events tagged.';
+// });
 
 Route::get('events/submit', ['uses' => 'EventController@submit', 'as' => 'events.submit']);
 Route::get('events/admin', ['uses' => 'EventController@admin', 'as' => 'events.admin', 'middleware' => 'auth']);
