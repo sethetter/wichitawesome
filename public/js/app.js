@@ -14393,7 +14393,7 @@ $(window).load(function () {
     // Enable use of query string
     setTimeout(function () {
         // Race condition
-        if (form.inputs.fb_url.val().trim()) {
+        if (form.inputs.fb_url.val()) {
             fbButton.trigger('click');
         }
     }, 20);
