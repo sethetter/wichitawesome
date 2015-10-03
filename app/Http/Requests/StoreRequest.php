@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use ICT\Event;
 use ICT\Permission;
 use ICT\Role;
+use ICT\Tag;
 use ICT\User;
 use ICT\Venue;
 use ICT\Organization;
@@ -65,6 +66,9 @@ class StoreRequest extends Request
             break;
             case 'roles':
                 $rules = Role::$rules;
+            break;
+            case 'tags':
+                $rules = Tag::$rules;
             break;
             case 'users':
                 $rules = User::$rules;

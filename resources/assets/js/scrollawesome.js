@@ -1,4 +1,4 @@
-module.exports = function(undefined) {
+module.exports = (function(undefined) {
     function documentHeight() {
         return Math.max(
             document.documentElement.clientHeight,
@@ -7,12 +7,6 @@ module.exports = function(undefined) {
             document.body.offsetHeight,
             document.documentElement.offsetHeight
         );
-    }
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     var scroll = window.requestAnimationFrame ||
                  window.webkitRequestAnimationFrame ||
@@ -30,8 +24,21 @@ module.exports = function(undefined) {
     var eventList = document.getElementById('event_list');
     var pagination = document.getElementById('pagination_next');
     var paginationStart;
-    var currentPage = getParameterByName('page') || 1;
     var loadingPage = false;
+
+    if (pagination) {
+        var nextPage = 2; // Assume we are on page 1
+        var queryStr = pagination.href.split('?')[1];
+        var queryVars = queryStr.split('&');
+        var i = 0;
+        for ( var i; i < queryVars.length; i++ ) {
+            var pair = queryVars[i].split('=');
+            if (decodeURIComponent(pair[0]) == 'page') {
+                nextPage = decodeURIComponent(pair[1]); // If page is set use that instead
+                queryVars.splice(i, 1);
+            }
+        }
+    }
 
     var loop = function(){
         var scrollY = window.pageYOffset;
@@ -61,10 +68,9 @@ module.exports = function(undefined) {
                 matrix[i].el.style['top'] = '';
             }
 
-            if(scrollY >= paginationStart && !loadingPage) {
+            if(pagination && scrollY >= paginationStart && !loadingPage) {
                 loadingPage = true;
-                currentPage++
-                var url = apiUrl + 'view/events/?page=' + currentPage;
+                var url = apiUrl + 'view/events/?' + queryVars.join('&') + '&page=' + nextPage;
                 var req = new XMLHttpRequest(); 
                 req.open('GET', url, true);
                 req.onreadystatechange = function () {
@@ -75,14 +81,14 @@ module.exports = function(undefined) {
                     if(req.readyState === 4) {
                         eventList.insertAdjacentHTML('beforeend', req.responseText);
                         pagination.style.display = 'none';
+                        nextPage++;
                         refresh();
                     }
                 }
                 req.send(null);
             }
         };
-
-        scroll( loop )
+        scroll(loop)
     };
 
     var refresh = function() {
@@ -115,6 +121,14 @@ module.exports = function(undefined) {
 
     window.onresize = refresh;
 
-    refresh();
-    loop();
-};
+    var init = function() {
+        refresh();
+        loop();
+    };
+
+    return { 
+        init: init, 
+        refresh: refresh 
+    }
+    
+})();

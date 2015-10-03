@@ -5,6 +5,7 @@ namespace ICT\Http\Controllers;
 use Illuminate\Http\Request;
 
 use ICT\Organization;
+use ICT\Tag;
 use ICT\Http\Requests\AdminRequest;
 use ICT\Http\Requests\CollectRequest;
 use ICT\Http\Requests\StoreRequest;
@@ -32,7 +33,7 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        $data['organizations'] = Venue::all();
+        $data['organizations'] = Organization::with('tags')->get();
         return view('organizations.index', $data);
     }
 
@@ -43,7 +44,8 @@ class OrganizationController extends Controller
      */
     public function create(AdminRequest $request)
     {
-        return view('organizations.create');
+        $data['tags'] = Tag::orderBy('name')->get();
+        return view('organizations.create', $data);
     }
 
     /**
@@ -54,6 +56,7 @@ class OrganizationController extends Controller
     public function submit(Request $request)
     {
         $data['fb_url'] = $request->fb_url;
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('organizations.submit', $data);
     }
 
@@ -65,10 +68,10 @@ class OrganizationController extends Controller
     public function collect(CollectRequest $request)
     {
         $data = $request->all();
-        if($request->user() && $request->user()->hasPermission('organizations.store')) {
+        if($request->user() && $request->user()->hasPermission('organizations.admin')) {
             $data['visible'] = true;
         }
-        Organization::create($data);
+        Organization::create($data)->tags()->attach($request->tags);
         return redirect('organizations.submit');
     }
 
@@ -81,7 +84,7 @@ class OrganizationController extends Controller
     {
         $data = $request->all();
         $data['visible'] = true;
-        Organization::create($data);
+        Organization::create($data)->tags()->attach($request->tags);
         return redirect('organizations/admin')->with('message', 'Organization created!');
     }
 
@@ -93,7 +96,7 @@ class OrganizationController extends Controller
      */
     public function show($id)
     {
-        $data['organization'] = Organization::findOrFail($id); 
+        $data['organization'] = Organization::with('tags')->findOrFail($id);
         return view('organizations.show', $data);
     }
 
@@ -105,7 +108,8 @@ class OrganizationController extends Controller
      */
     public function edit(AdminRequest $request, $id)
     {
-        $data['organization'] = Organization::withHidden()->findOrFail($id);
+        $data['organization'] = Organization::with('tags')->withHidden()->findOrFail($id);
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('organizations.edit', $data);
     }
 
@@ -117,7 +121,9 @@ class OrganizationController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        Organization::withHidden()->findOrFail($id)->update($request->all());
+        $organization = Organization::withHidden()->findOrFail($id);
+        $organization->update($request->all());
+        $organization->tags()->sync($request->input('tags', []));
         return redirect('organizations/admin')->with('message', 'Organization updated.');
     }
 
@@ -129,7 +135,11 @@ class OrganizationController extends Controller
      */
     public function destroy(DestroyRequest $request, $id)
     {
-        Organization::withHidden()->findOrFail($id)->delete();
+        $organization = Organization::withHidden()->findOrFail($id);
+        if(count($event->tags)) {
+            $organization->tags()->detach($events->tags->lists('id')->toArray());
+        }
+        $organization->delete();
         return redirect('organizations/admin')->with('message', 'Organization destroyed.');
     }
 }

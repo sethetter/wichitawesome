@@ -4,6 +4,7 @@ namespace ICT\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use ICT\Tag;
 use ICT\Venue;
 use ICT\Http\Requests\AdminRequest;
 use ICT\Http\Requests\CollectRequest;
@@ -32,7 +33,7 @@ class VenueController extends Controller
      */
     public function index()
     {
-        $data['venues'] = Venue::all();
+        $data['venues'] = Venue::with('tags')->get();
         return view('venues.index', $data);
     }
 
@@ -43,7 +44,8 @@ class VenueController extends Controller
      */
     public function create(AdminRequest $request)
     {
-        return view('venues.create');
+        $data['tags'] = Tag::orderBy('name')->get();
+        return view('venues.create', $data);
     }
 
     /**
@@ -54,6 +56,7 @@ class VenueController extends Controller
     public function submit(Request $request)
     {
         $data['fb_url'] = $request->fb_url;
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('venues.submit', $data);
     }
 
@@ -65,10 +68,10 @@ class VenueController extends Controller
     public function collect(CollectRequest $request)
     {
         $data = $request->all();
-        if($request->user() && $request->user()->hasPermission('venues.store')) {
+        if($request->user() && $request->user()->hasPermission('venues.admin')) {
             $data['visible'] = true;
         }
-        Venue::create($data);
+        Venue::create($data)->tags()->attach($request->tags);
         return redirect('venues.submit');
     }
 
@@ -81,7 +84,7 @@ class VenueController extends Controller
     {
         $data = $request->all();
         $data['visible'] = true;
-        Venue::create($data);
+        Venue::create($data)->tags()->attach($request->tags);
         return redirect('venues/admin')->with('message', 'Venue created!');
     }
 
@@ -130,7 +133,7 @@ class VenueController extends Controller
      */
     public function show($id)
     {
-        $data['venue'] = Venue::findOrFail($id); 
+        $data['venue'] = Venue::with('tags')->findOrFail($id); 
         return view('venues.show', $data);
     }
 
@@ -142,7 +145,8 @@ class VenueController extends Controller
      */
     public function edit(AdminRequest $request, $id)
     {
-        $data['venue'] = Venue::withHidden()->findOrFail($id);
+        $data['venue'] = Venue::with('tags')->withHidden()->findOrFail($id);
+        $data['tags'] = Tag::orderBy('name')->get();
         return view('venues.edit', $data);
     }
 
@@ -154,7 +158,9 @@ class VenueController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        Venue::withHidden()->findOrFail($id)->update($request->all());
+        $venue = Venue::withHidden()->findOrFail($id);
+        $venue->update($request->all());
+        $venue->tags()->sync($request->input('tags', []));
         return redirect('venues/admin')->with('message', 'Venue updated.');
     }
 
@@ -166,7 +172,11 @@ class VenueController extends Controller
      */
     public function destroy(DestroyRequest $request, $id)
     {
-        Venue::withHidden()->findOrFail($id)->delete();
+        $venue = Venue::with('tags')->withHidden()->findOrFail($id);
+        if(count($event->tags)) {
+            $venue->tags()->detach($venue->tags->lists('id')->toArray());
+        }
+        $venue->delete();
         return redirect('venues/admin')->with('message', 'Venue destroyed.');
     }
 }

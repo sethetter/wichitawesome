@@ -215,7 +215,6 @@ function positionLabel($field) {
     var toggle = $field.val().trim() != '';
     $field.parent().toggleClass('js-field-active', toggle);
 }
-
 $('.field').each(function(){
     positionLabel($(this));
 }).on('change cut paste input keyup blur', function() {
@@ -226,25 +225,27 @@ $('.field').each(function(){
 $('.date-input').pickadate({format:'mm/dd/yyyy'});
 $('.time-input').pickatime();
 
-// Venues pulled from database
-var venues = [];
-// Setup venues autocomplete
-$.getJSON(apiUrl + 'venues', function( data, status, xhr ) {
-    venues = $.map(data, function (venue) { 
-        return { value: venue.name + ' ' + venue.street, data: venue };
+if(form.inputs.venue_name.length) {
+    // Venues pulled from database
+    var venues = [];
+    // Setup venues autocomplete
+    $.getJSON(apiUrl + 'venues', function( data, status, xhr ) {
+        venues = $.map(data, function (venue) { 
+            return { value: venue.name + ' ' + venue.street, data: venue };
+        });
+        form.inputs.venue_name.autocomplete({
+            lookup: venues,
+            lookupLimit: 3,
+            formatResult: function (suggestion, currentValue) {
+                return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
+            },
+            onSelect: function (suggestion) {
+                form.inputs.venue_id.val(suggestion.data.id).change();
+                mapButton.addClass('bg-light-gray');
+            }
+        });
     });
-    form.inputs.venue_name.autocomplete({
-        lookup: venues,
-        lookupLimit: 3,
-        formatResult: function (suggestion, currentValue) {
-            return '<strong>' + suggestion.data.name + '</strong><br><small>' + suggestion.data.street + ', ' + suggestion.data.city + ', ' + suggestion.data.state + '</small>';
-        },
-        onSelect: function (suggestion) {
-            form.inputs.venue_id.val(suggestion.data.id).change();
-            mapButton.addClass('bg-light-gray');
-        }
-    });
-});
+}
 
 // Setup map inputs
 maps.loadApi();

@@ -1,11 +1,11 @@
 @extends('app')
 
-@section('title', 'Permissions')
+@section('title', 'Tags')
 @section('description', '')
 
 @section('content')
     <div class="px2 py4 container clearfix">
-        <form method="post" action="{{ action('PermissionController@store') }}">
+        <form method="post" action="{{ action('TagController@store') }}">
             <div class="form-head">
                 @include('errors.form')
             </div>
