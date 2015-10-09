@@ -31,5 +31,8 @@ class PermissionTableSeeder extends Seeder
         Permission::create(['name' => 'organizations.admin']);
         Permission::create(['name' => 'organizations.update']);
         Permission::create(['name' => 'organizations.destroy']);
+        Permission::create(['name' => 'tags.admin']);
+        Permission::create(['name' => 'tags.update']);
+        Permission::create(['name' => 'tags.destroy']);
     }
 }
