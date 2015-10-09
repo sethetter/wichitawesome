@@ -1,4 +1,4 @@
-# Wichitawesome
+# [Wichitawesome](http://wichitaweso.me)
 
 An awesome event calendar for Wichita, KS.
 
