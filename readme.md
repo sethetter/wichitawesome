@@ -12,6 +12,20 @@ Run [Composer](http://getcomposer.org/) in the root directory.
 
     composer install
 
+Ensure that you have [Node.js](http://nodejs.org/download/) on your machine, it is required to install Gulp and Elixir in the next steps.
+
+Frontend assets are compiled with [Laravel Elixir](http://laravel.com/docs/5.1/elixir).
+
+First, install [Gulp](http://gulpjs.com).
+
+    npm install --global gulp
+
+Then, install Elixir.
+
+    npm install
+
+Run `gulp` in the root directory to begin watching for file changes in `/resources/assets`.
+
 ### Setup Database
 
 Create a new MYSQL database.
