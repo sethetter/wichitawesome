@@ -3,6 +3,7 @@
 namespace ICT\Console\Commands;
 
 use Illuminate\Console\Command;
+use Schema;
 
 use ICT\Services\FacebookEventFetcher;
 use ICT\Venue;
@@ -47,9 +48,12 @@ class FetchFacebookEvents extends Command
      */
     public function __construct(facebookEventFetcher $fetcher)
     {
+
         parent::__construct();
 
         $this->fetcher = $fetcher;
+
+        if (!Schema::hasTable('venues')) return;
 
         $this->venues = Venue::whereNotNull('facebook')->get();
         $this->organizations = Organization::whereNotNull('facebook')->get();
