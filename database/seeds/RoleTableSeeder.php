@@ -15,10 +15,12 @@ class RoleTableSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name' => 'Admin'
+            'name' => 'Admin',
+            'slug' => 'admin'
         ])->permissions()->sync(Permission::all()->lists('id')->toArray());
         Role::create([
             'name' => 'Editor',
+            'slug' => 'editor'
         ]);
     }
 }
